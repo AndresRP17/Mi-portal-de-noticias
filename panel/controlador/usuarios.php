@@ -4,17 +4,17 @@ $operacion = $_GET["operacion"];
 
 if ($operacion == "new") {
     $email = $_POST["email"];
-    $password = $_POST["password"];
-    $sentencia = $conexion->prepare("INSERT INTO usuarios (email, contraseña) VALUES (?,?) ");
-    $sentencia->bind_param("ss", $email, $password);
+    $contraseña = $_POST["password"];
+    $sentencia = $conexion->prepare("INSERT INTO usuarios (email, password) VALUES (?,?) ");
+    $sentencia->bind_param("ss", $email, $contraseña);
     $sentencia->execute();
 
 } else if ($operacion == "edit") {
     $id = $_POST["id"];
     $email = $_POST["email"];
-    $password = $_POST["password"];
-    $sentencia = $conexion->prepare("UPDATE usuarios SET email = ?, contraseña = ? WHERE id = ?");
-    $sentencia->bind_param("ssi" , $email, $password, $id);
+    $contraseña = $_POST["password"];
+    $sentencia = $conexion->prepare("UPDATE usuarios SET email = ?, password = ? WHERE id = ?");
+    $sentencia->bind_param("ssi" , $email, $contraseña, $id);
     $sentencia->execute();
 
 } else if ($operacion == "delete"){
@@ -26,7 +26,7 @@ if ($operacion == "new") {
     
 }
 
-header("Location: /tareanueva/views/usuarios/listado.php");
+header("Location: /tareanueva/panel/views/usuarios/listado.php");
 //aca van a estar todas las operaciones que podes realizar en el formulario
-
+exit();
 ?>

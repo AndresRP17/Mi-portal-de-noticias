@@ -9,7 +9,7 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Listado</title>
 </head>
 <body>
     <style>
@@ -27,7 +27,7 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
         
     </style>
 
-<a href="/tareanueva/views/usuarios/formulario.php">Agregar</a>
+<a href="/tareanueva/panel/views/usuarios/formulario.php">Agregar</a>
     <table><!-- Aca haces la tabla normal-->
             <thead>
                 <tr>
@@ -35,17 +35,19 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
                     <th>EMAIL</th>
                     <th>PASSWORD</th>
                 </tr>
+                <a href="/tareanueva/index.php">Volver</a>
             </thead>
             <tbody><!-- Aca repetis la tabla pero utilizando el bucle while para ir actualizando con php-->
             <?php while ($fila = $resultado->fetch_object()) { ?> 
+                
                 <tr>
                     <td> <?php echo $fila->id ?></td>
                     <td> <?php echo $fila->email ?></td>
-                    <td> <?php echo $fila->contraseña ?></td>
-                    <td><a href="/tareanueva//views/usuarios/formulario.php?id=<?php echo $fila->id ?>">Editar</a></td>
-                    <td><a href="/tareanueva/controlador/usuarios.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar este usuario?');">Eliminar</a></td>
+                    <td> <?php echo $fila->password ?></td>
+                    <td><a href="/tareanueva/panel/views/usuarios/formulario.php?id=<?php echo $fila->id ?>">Editar</a></td>
+                    <td><a href="/tareanueva/panel/controlador/usuarios.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar este usuario?');">Eliminar</a></td>
                 </tr>
-
+                
         <?php }?>
     </tbody>
     </table>

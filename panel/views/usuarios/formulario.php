@@ -32,7 +32,7 @@ if (isset($_GET["id"])){
         <h1>Nuevo usuario</h1>
     <?php }?>
 
-    <form action="/tareanueva/controlador/usuarios.php?operacion=<?php echo (isset($_GET['id'])) ? 'edit' : 'new'; ?>" method="post">
+    <form action="/tareanueva/panel/controlador/usuarios.php?operacion=<?php echo (isset($_GET['id'])) ? 'edit' : 'new'; ?>" method="post">
     <input type="hidden" name="id" value="<?php echo (isset($_GET["id"])) ? $usuario->id : "" ?>"> <!-- aca se hace que si tiene ID es edit o new-->
     
         <div>
@@ -42,7 +42,7 @@ if (isset($_GET["id"])){
         </div>
         <div>
                 <label>CONTRASEÑA</label>
-                <input type="text" name="password" value="<?php echo (isset($_GET["id"])) ? $usuario->contraseña : "" ?>">
+                <input type="text" name="password" value="<?php echo (isset($_GET["id"])) ? $usuario->password : "" ?>">
                 
         </div>
         <button>Guardar</button>
