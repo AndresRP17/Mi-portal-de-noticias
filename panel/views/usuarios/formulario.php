@@ -36,13 +36,8 @@ if (isset($_GET["id"])){
     <input type="hidden" name="id" value="<?php echo (isset($_GET["id"])) ? $usuario->id : "" ?>"> <!-- aca se hace que si tiene ID es edit o new-->
     
         <div>
-                <label>EMAIL</label>
-                <input type="text" name="email" value="<?php echo (isset($_GET["id"])) ? $usuario->email : "" ?>">
-                
-        </div>
-        <div>
-                <label>CONTRASEÑA</label>
-                <input type="text" name="password" value="<?php echo (isset($_GET["id"])) ? $usuario->password : "" ?>">
+                <label>NOMBRE</label>
+                <input type="text" name="nombre" value="<?php echo (isset($_GET["id"])) ? $usuario->nombre : "" ?>">
                 
         </div>
         <button>Guardar</button>

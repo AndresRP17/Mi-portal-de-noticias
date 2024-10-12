@@ -1,4 +1,7 @@
 /* styles.css */
+
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -40,6 +43,44 @@ body {
 
 .nav-links a:hover {
     background-color: rgba(255, 255, 255, 0.2); /* Cambia el color de fondo al pasar el mouse */
+}
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.titulo-noticia {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.imagen-noticia {
+    width: 100%; /* O ajusta según sea necesario */
+    height: auto;
+    border-radius: 5px;
+}
+
+.descripcion-noticia {
+    font-size: 1em;
+    color: #555;
+    margin: 10px 0;
+}
+
+.leer-mas {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.leer-mas:hover {
+    background-color: #0056b3;
 }
 
 /* Footer */

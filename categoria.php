@@ -5,12 +5,8 @@ $resultado = $conexion->query("SELECT * FROM categorias");
 ?>
 
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 // Incluir db
-  require_once('../tareanueva/panel/includes/db.php');
+  include('../tareanueva/panel/includes/db.php');
 
 // Capturar error de datos mal ingresados
   $error = isset($_GET["error"]) ? intval($_GET["error"]) : 0;
@@ -28,11 +24,11 @@ if ($form){
     $stmt->bind_param('s', $categoria);
 
     if ($stmt->execute()) {
-      header('Location: categoria.php');// Si stmt execute dio true redirigir a la misma pagina para seguir agregando
+      header('Location: ../../categoria.php');// Si stmt execute dio true redirigir a la misma pagina para seguir agregando
       exit;
     } else {
       echo 'Error al insertar el registro: ' . $stmt->error;
-      header('Location: ../categoria.php?error=1');// Else hacer una redireccion a la misma pagina pero en la url decir error=1
+      header('Location: ../../categoria.php?error=1');// Else hacer una redireccion a la misma pagina pero en la url decir error=1
       exit();
     }
 
@@ -56,6 +52,20 @@ if ($form){
     <title>Categoria</title>
 </head>
 <body>
+<style>
+        a{
+            text-decoration: none;
+            color: #007bff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        
+    </style>
     <form action="" method="post">
 
     <a href="/tareanueva/index.php">Volver</a>
@@ -67,10 +77,29 @@ if ($form){
     <input type="hidden" name="hidden" value="1">
      </form>
      </div>
-
-
-
-  
+     <table><!-- Aca haces la tabla normal-->
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+            
+                </tr>
+                
+            </thead>
+     </tr>
+                
+            </thead>
+            <tbody><!-- Aca repetis la tabla pero utilizando el bucle while para ir actualizando con php-->
+            <?php while ($fila = $resultado->fetch_object()) { ?> 
+                
+                <tr>
+                    <td> <?php echo $fila->id ?></td>
+                    <td> <?php echo $fila->nombre ?></td>
+                  
+                    <td><a href="/tareanueva/editarcat.php?id=<?php echo $fila->id ?>">Editar</a></td>
+                    <td><a href="/tareanueva/eliminarcat.php?id=<?php echo $fila->id ?> onclick="return confirm('¿Estas seguro de querer eliminar esta categoria?');">Eliminar</a></td>
+                </tr>
+                <?php }?> 
 
 </body>
 </html>

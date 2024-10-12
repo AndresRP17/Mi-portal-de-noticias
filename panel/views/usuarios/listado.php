@@ -32,8 +32,7 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>EMAIL</th>
-                    <th>PASSWORD</th>
+                    <th>NOMBRE</th>
                 </tr>
                 <a href="/tareanueva/index.php">Volver</a>
             </thead>
@@ -42,11 +41,11 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
                 
                 <tr>
                     <td> <?php echo $fila->id ?></td>
-                    <td> <?php echo $fila->email ?></td>
-                    <td> <?php echo $fila->password ?></td>
+                    <td> <?php echo $fila->nombre ?></td>
                     <td><a href="/tareanueva/panel/views/usuarios/formulario.php?id=<?php echo $fila->id ?>">Editar</a></td>
                     <td><a href="/tareanueva/panel/controlador/usuarios.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar este usuario?');">Eliminar</a></td>
                 </tr>
+                    
                 
         <?php }?>
     </tbody>
