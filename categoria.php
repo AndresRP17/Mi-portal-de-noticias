@@ -24,7 +24,7 @@ if ($form){
     $stmt->bind_param('s', $categoria);
 
     if ($stmt->execute()) {
-      header('Location: ../../categoria.php');// Si stmt execute dio true redirigir a la misma pagina para seguir agregando
+      header('Location: /tareanueva/categoria.php');// Si stmt execute dio true redirigir a la misma pagina para seguir agregando
       exit;
     } else {
       echo 'Error al insertar el registro: ' . $stmt->error;
@@ -71,7 +71,7 @@ if ($form){
     <a href="/tareanueva/index.php">Volver</a>
 
     <div>
-    <input type="text" name="categoria" placeholder="Inserte una categoria porfi" required>
+    <input type="text" name="categoria" placeholder="Inserte una categoria" required>
    
     <input type="submit" name="enviar">
     <input type="hidden" name="hidden" value="1">

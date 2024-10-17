@@ -1,7 +1,7 @@
 <?php
 //aca enlazas el archivo que creaste anteriormente y metes la variable//
 include("../tareanueva/panel/includes/db.php");//Es por la ubicacion del archivo en PHP!!!
-$resultado = $conexion->query("SELECT * FROM noticias order by fecha");
+$resultado = $conexion->query("SELECT * FROM noticias order by fecha DESC");
 ?>
 
 <!DOCTYPE html>

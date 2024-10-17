@@ -27,7 +27,7 @@ $id_categoria = isset($_GET['id_categoria']) ? intval($_GET['id_categoria']) : 0
 
 if ($id_categoria > 0) {
    // Preparar la consulta para obtener las noticias que pertenezcan a la categoría seleccionada
-    $stmt = $conexion->prepare('SELECT * FROM noticias WHERE id_categoria = ?');
+    $stmt = $conexion->prepare('SELECT * FROM noticias WHERE id_categoria = ? ORDER BY fecha DESC');
     $stmt->bind_param('i', $id_categoria);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -39,6 +39,7 @@ if ($id_categoria > 0) {
             echo "<p>" . $fila->descripcion . "</p>";
             echo "<img src='" . $fila->imagen . "' alt='Imagen de la noticia'>";
             echo "<hr>";
+            echo "<a href='detalle.php?id=" . $fila->id . "' class='leer-mas'>Leer más</a>";
         }
     } else {
         echo "No hay noticias en esta categoría.";

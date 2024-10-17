@@ -38,6 +38,17 @@ if (isset($_GET["id"])){
     <input type="file"  name="imagen"  required><br>
     
     <input type="date" name="fecha" placeholder="Ingrese una fecha" required><br>
+    <select name="id_categoria" id="categoria">
+
+    <option>Entretenimientos</option>
+
+    <option>Deportes</option>
+
+    <option>Musica</option>
+
+    <option>Otros</option>
+
+    </select>
 
     <input type="submit" value="Enviar" required>
 
