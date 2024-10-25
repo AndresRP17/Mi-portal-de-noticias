@@ -17,8 +17,7 @@
 </nav>
 </head>
 <body>
-    
-<?php
+    <?php
 // Conexión a la base de datos
 include("../tareanueva/panel/includes/db.php");
 
@@ -26,29 +25,99 @@ include("../tareanueva/panel/includes/db.php");
 $id_categoria = isset($_GET['id_categoria']) ? intval($_GET['id_categoria']) : 0;
 
 if ($id_categoria > 0) {
-   // Preparar la consulta para obtener las noticias que pertenezcan a la categoría seleccionada
-    $stmt = $conexion->prepare('SELECT * FROM noticias WHERE id_categoria = ? ORDER BY fecha DESC');
-    $stmt->bind_param('i', $id_categoria);
+    // Obtener el número de página actual
+    $pagina = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    $offset = 2; // Número de noticias por página
+    $limit = ($pagina - 1) * $offset;
+
+    // Consultar las noticias de la categoría seleccionada
+    $sql = "SELECT * FROM noticias WHERE id_categoria = ? ORDER BY fecha DESC LIMIT ?, ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("iii", $id_categoria, $limit, $offset);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Mostrar las noticias
-    if ($result->num_rows > 0) {
-        while ($fila = $result->fetch_object()) {
-            echo "<h2>" . $fila->titulo . "</h2>";
-            echo "<p>" . $fila->descripcion . "</p>";
-            echo "<img src='" . $fila->imagen . "' alt='Imagen de la noticia'>";
-            echo "<hr>";
-            echo "<a href='detalle.php?id=" . $fila->id . "' class='leer-mas'>Leer más</a>";
+    // Consulta para contar las noticias en la categoría
+    $sqlCount = "SELECT COUNT(*) AS cantidad FROM noticias WHERE id_categoria = ?";
+    $stmtCount = $conexion->prepare($sqlCount);
+    $stmtCount->bind_param("i", $id_categoria);
+    $stmtCount->execute();
+    $resultCount = $stmtCount->get_result();
+    $total = $resultCount->fetch_object();
+    $ultima_pagina = ceil($total->cantidad / $offset);
+
+    // Recorrer las noticias
+    while ($noticia = $result->fetch_object()) {
+        echo "<div class='item'>";
+        echo "<div style='text-align: center;'>";
+        echo "<h2>" . $noticia->titulo . "</h2>";
+        echo "<a href='detalle.php?id=" . $noticia->id . "'>";
+        echo "<img width='800' src='" . $noticia->imagen . "' alt='" . $noticia->titulo . "'>";
+        echo "</a>";
+        echo "</div>";
+        echo "<p>" . $noticia->fecha . "</p>";
+        echo "<p>" . $noticia->descripcion . "</p>";
+
+        // Consultar las imágenes relacionadas con esta noticia
+        $sqlImagenes = "SELECT * FROM noticias_imagenes WHERE id_noticia = ?";
+        $stmt_imagenes = $conexion->prepare($sqlImagenes);
+        $stmt_imagenes->bind_param("i", $noticia->id);
+        $stmt_imagenes->execute();
+        $resultado_imagenes = $stmt_imagenes->get_result();
+        
+        // Mostrar las imágenes
+        echo "<div class='contenedorGaleria'>";
+        while ($imagen = $resultado_imagenes->fetch_object()) {
+            echo "<div class='contenedorImagen'>";
+            echo "<img src='" . $imagen->ruta_imagen . "'>";
+            echo "</div>";
         }
-    } else {
-        echo "No hay noticias en esta categoría.";
-    }if (!$stmt) {
-        echo "Error en la consulta: " . $conexion->error;
+        echo "</div>"; // Fin de contenedorGaleria
+
+        $stmt_imagenes->close();
+        echo "</div>"; // Fin de item
     }
-}    
+
+    $stmt->close();
+    $stmtCount->close();
+
+    // Paginación
+    echo '<div class="paginacion">';
+    if ($pagina > 1) {
+        echo '<a href="?id_categoria=' . $id_categoria . '&page=' . ($pagina - 1) . '">Anterior</a>';
+    }
+
+    if ($ultima_pagina > 1) {
+        for ($i = 1; $i <= $ultima_pagina; $i++) {
+            if ($i == $pagina) {
+                echo '<span>' . $i . '</span>'; // Página actual
+            } else {
+                echo '<a href="?id_categoria=' . $id_categoria .  '&page=' . $i . '">' . $i . '</a>';
+            }
+        }
+    }
+
+    if ($pagina < $ultima_pagina) {
+        echo '<a href="?id_categoria=' . $id_categoria . '&page=' . ($pagina + 1) . '">Siguiente</a>';
+    }
+    echo '</div>'; // Fin de paginacion
+}
 ?>
 
+<style>
+    .contenedorImagen{
+	display: inline-block;
+	width: 20%;
+	height: 200px;
+}
+
+.contenedorImagen img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+</style>
 </body>
 </html> 
 

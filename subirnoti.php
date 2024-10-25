@@ -26,33 +26,43 @@ if (isset($_GET["id"])){
 <body>
 
     <div>
-    <form action="/tareanueva/noticias.php?operacion=<?php echo (isset($_GET['id']))  ?>"  method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="<?php echo (isset($_GET["id"])) ? $noticia->id : "" ?>"> <!-- aca se hace que si tiene ID es edit o new-->
+    <form action="/tareanueva/agregarnoti.php"  method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="1"> <!-- aca se hace que si tiene ID es edit o new-->
     <h1>NUEVA NOTICIA</h1>
-    <input type="text" name="titulo"  value="<?php echo (isset($_GET["id"])) ? $noticia->titulo : "" ?>"placeholder="Ingrese un titulo" required><br>
+
+    <labeL>TITULO</label>
+    <input type="text" name="titulo" placeholder="Ingrese un titulo" required><br>
     
+    <label>DESCRIPCION</label>
     <input type="text" name="descripcion" placeholder="Ingrese una descripcion" required><br>
     
-    <input type="text" name="texto" placeholder="Ingrese un texto" required><br>
+    <label>TEXTO</label>
+    <input type="text" name="texto" placeholder="Ingrese un texto"><br>
     
+    <label>IMAGEN</label>
     <input type="file"  name="imagen"  required><br>
+
+    <label>GALERIA DE IMAGENES</label>
+    <input type="file" name="upload[]" multiple  /><br>
     
+    <label>FECHA</label>
     <input type="date" name="fecha" placeholder="Ingrese una fecha" required><br>
+
+    <label>INSERTE UNA CATEGORIA</label>
     <select name="id_categoria" id="categoria">
 
-    <option>Entretenimientos</option>
+    <option value="6">Entretenimientos</option>
 
-    <option>Deportes</option>
+    <option value="1">Deportes</option>
 
-    <option>Musica</option>
+    <option value="4">Musica</option>
 
-    <option>Otros</option>
+    <option value="12">Otros</option>
 
-    </select>
+    </select><br>
 
     <input type="submit" value="Enviar" required>
 
-    <input type="hidden" name="hidden" value="1" required>
  </form>
 
     </div>

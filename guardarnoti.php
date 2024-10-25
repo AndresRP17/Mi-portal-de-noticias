@@ -12,6 +12,4 @@ require_once('../tareanueva/panel/includes/db.php');?>
     $sentencia = $conexion->prepare("UPDATE noticias SET titulo = ?, descripcion = ?, texto = ?,  imagen = ?, fecha = ? WHERE id = ?");
     $sentencia->bind_param("sssssi" , $titulo, $descripcion, $texto, $imagen, $fecha, $id);
     $sentencia->execute();
-    
-    header("Location: /tareanueva/noticias.php");
-    ?>
+    echo $sentencia;

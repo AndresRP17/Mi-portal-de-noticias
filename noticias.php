@@ -39,81 +39,17 @@
         }
     </style>
 <body>
-<?php
 
 
-// Incluir db
-require_once('../tareanueva/panel/includes/db.php');
+<a href="/tareanueva/subirnoti.php">Agregar</a>
 
-// Capturar error de datos mal ingresados
-$error = isset($_GET["error"]) ? intval($_GET["error"]) : 0;
-
-// Capturar valor del hidden
-$form = isset($_POST["hidden"]) ? intval($_POST["hidden"]) : 0;
-
-// Si hidden es 1 hacer la consulta
-if ($form) {
-    // Capturar todos los valores de la noticia
-    $titulo = isset($_POST['titulo']) ? trim($_POST['titulo']) : '';
-    $texto = isset($_POST['texto']) ? trim($_POST['texto']) : '';
-    $descripcion = isset($_POST['descripcion']) ? trim($_POST['descripcion']) : '';
-    $fecha = isset($_POST['fecha']) && !empty($_POST['fecha']) ? trim($_POST['fecha']) : date('Y-m-d H:i:s');
-
-    // Verificar si hay una imagen y si no hubo errores en la subida
-    if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
-        $nombreArchivo = $_FILES['imagen']['name'];
-        $archivoTmp = $_FILES['imagen']['tmp_name'];
-        $carpetaDestino = 'uploads/'; // Carpeta donde se guardarán las imágenes
-
-        // Crear la ruta completa del archivo
-        $rutaArchivo = $carpetaDestino . basename($nombreArchivo);
-
-        // Mover el archivo al directorio destino
-        if(move_uploaded_file($archivoTmp, $rutaArchivo)) {
-            // Si el archivo se movió correctamente, insertar la ruta en la base de datos
-            $imagen = $rutaArchivo;
-        } else {
-            echo "Error al subir la imagen.";
-            exit();
-        }
-    } else {
-        $imagen = ''; // Si no hay imagen, guardar vacío o lo que decidas.
-    }
-
-    // Preparar la consulta
-    $stmt = $conexion->prepare('INSERT INTO noticias (titulo, texto, imagen, descripcion, fecha) VALUES (?,?,?,?,?)');
-    
-    // Hacer un bind de los valores de la petición
-    $stmt->bind_param('sssss', $titulo, $texto, $imagen, $descripcion, $fecha);
-
-    if ($stmt->execute()) {
-        header('Location: noticias.php'); // Si stmt execute dio true, redirigir
-        exit;
-    } else {
-        echo 'Error al insertar el registro: ' . $stmt->error;
-        header('Location: ../noticias.php?error=1'); // Si hay error, redirigir a la misma página con error
-        exit();
-    }
-
-    $stmt->close();
-}
-
-?>
-
-<?php
-  if ($error) { ?>
-    <h1>Error al cargar los datos, inténtelo nuevamente.</h1>
-  <?php } ?>
-
-  <a href="/tareanueva/subirnoti.php">Agregar</a>
-
-  <a href="/tareanueva/index.php">Volver</a>
+<a href="/tareanueva/index.php">Volver</a>
 
 
 <?php
 //aca enlazas el archivo que creaste anteriormente y metes la variable//
 include("../tareanueva/panel/includes/db.php");//Es por la ubicacion del archivo en PHP!!!
-$resultado = $conexion->query("SELECT * FROM noticias order by fecha DESC");
+$resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
 ?>
 
 <table><!-- Aca haces la tabla normal-->
