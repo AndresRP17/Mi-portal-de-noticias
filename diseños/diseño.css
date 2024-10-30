@@ -1,0 +1,241 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(200, 212, 235);
+}
+
+/* Navbar principal */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0056b3;
+    padding: 15px 20px;
+    position: relative; /* Añadir posición relativa para el menú desplegable */
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Botón de menú hamburguesa */
+.menu {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    border: 2px solid rgb(250, 250, 250);
+    border-radius: 10%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: 300ms ease-in-out;
+    cursor: progress;
+    position: absolute;
+    right: 20px;
+    z-index: 10000;
+}
+
+.bar {
+    height: 3px;
+    width: 40px;
+    background-color: #f3f5f5;
+    border-radius: 5px;
+    transition: 200ms ease-in-out;
+}
+
+.menu:hover { 
+background-color: rgb(10, 2, 2);
+}
+
+.menu.active .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu.active .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+/* Menú de categorías oculto por defecto */
+.nav-links {
+    list-style: none;
+    display: none; /* Inicialmente oculto */
+    flex-direction: column; /* Apilar verticalmente */
+    background-color: #0056b3; /* Color de fondo del menú */
+    padding: 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    position: absolute; /* Posición absoluta para el menú desplegable */
+    top: 70px; /* Ajusta esta posición según la altura de tu navbar */
+    right: 20px; /* Alineado a la derecha */
+}
+
+.nav-links2 {
+    list-style: none;
+    flex-direction: column; /* Apilar verticalmente */
+    background-color: #0056b3; /* Color de fondo del menú */
+    padding: 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    position: absolute; /* Posición absoluta para el menú desplegable */
+    top: 70px; /* Ajusta esta posición según la altura de tu navbar */
+    right: 20px; /* Alineado a la derecha */
+}
+
+/* Estilo de los enlaces en el menú de categorías */
+.nav-links li {
+    display: block; /* Enlazar en bloque */
+    margin: 5px 0; /* Margen entre enlaces */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px; /* Espacio interno */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mostrar el menú desplegable al activar el menú */
+.menu.active + .menu_container .nav-links {
+    display: flex;
+}
+
+/* Estilos generales de la página */
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: auto 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.titulo-noticia {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.imagen-noticiaa {
+    width: 30%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.descripcion-noticia {
+    font-size: 1em;
+    color: #555;
+    margin: 10px 0;
+}
+
+.leer-mas {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.leer-mas:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+.footer {
+    background-color: #050404;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 0 50px;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 10px;
+}
+
+.footer-section h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #0056b3;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #111;
+    font-size: 14px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Paginación */
+.paginacion1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.paginacion1 a, .paginacion1 span {
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007BFF;
+    border: 1px solid #007BFF;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.paginacion1 a:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+.paginacion1 span {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

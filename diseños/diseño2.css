@@ -1,0 +1,95 @@
+.noticia {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.titulo-noticia {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.imagen-noticia {
+    width: 3%; /* O ajusta según sea necesario */
+    height: auto;
+    border-radius: 5px;
+}
+
+.descripcion-noticia {
+    font-size: 1em;
+    color: #555;
+    margin: 10px 0;
+}
+
+.leer-mas {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.leer-mas:hover {
+    background-color: #0056b3;
+}
+
+
+.paginacion {
+    display: flex;
+    justify-content: center; /* Centra los enlaces */
+    margin: 20px 0; /* Espaciado vertical */
+}
+
+.paginacion a, .paginacion1 span {
+    margin: 0 5px; /* Espaciado entre elementos */
+    padding: 8px 12px; /* Espaciado interno */
+    text-decoration: none; /* Sin subrayado */
+    color: #007BFF; /* Color de texto */
+    border: 1px solid #007BFF; /* Borde del enlace */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.paginacion a:hover {
+    background-color: #007BFF; /* Color de fondo al pasar el mouse */
+    color: white; /* Color de texto al pasar el mouse */
+}
+
+.paginacion span {
+    background-color: #f1f1f1; /* Color de fondo para el número actual */
+    color: #333; /* Color de texto para el número actual */
+    padding: 8px 12px; /* Igualar el padding de los enlaces */
+    border: 1px solid #ccc; /* Borde para la página actual */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.nav-links2 {
+    list-style: none; /* Sin estilo de lista */
+    padding: 0; /* Sin padding */
+    display: flex; /* Usa flexbox para los enlaces */
+}
+
+.nav-links2 li {
+    margin-left: 20px; /* Espaciado entre enlaces */
+}
+
+.nav-links2 a {
+    color: rgb(24, 21, 21); /* Color del texto de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+    padding: 5px 10px; /* Espaciado interno */
+}
+
+.nav-links2 a:hover {
+    background-color: #f8f4f4; /* Color de fondo al pasar el mouse */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Asegura que el logo y el enlace estén en la misma línea */
+.navbar .logo {
+    display: flex; /* Alinea el logo */
+    align-items: center; /* Centra verticalmente el contenido del logo */
+}
