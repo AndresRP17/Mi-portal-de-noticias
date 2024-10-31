@@ -2,7 +2,7 @@
 // Conectar a la base de datos
 include("../../tareanueva/panel/includes/db.php");
 
-$offset = 3;
+$offset = 6;
 $pagina = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
 $buscador = isset($_GET["buscador"]) ? $_GET["buscador"] : "";
 $limit = ($pagina - 1) * $offset;
@@ -86,32 +86,19 @@ $stmt2->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi portal de noticias</title>
     <link rel="stylesheet" href="../diseños/diseño.css">
-    <link rel="stylesheet" href="../diseños/diseño2.css">
-    <style>
-        /* Estilo inicial para el buscador */
-        #buscador { 
-            display: none; /* Ocultamos el buscador por defecto */
-        }
-        #icono-busqueda {
-            cursor: pointer;
-            width: 40px; /* Ajusta el tamaño aquí */
-            height: 50px; /* Ajusta el tamaño aquí */
-        }
-        #boton-buscar {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../diseños/diseño2.css">  
 </head>
+
+
+
 <body>
 
 <nav class="navbar">
     <div class="logo">
         <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">Mi portal de noticias</a></h1>
-        <form action="index2.php" method="get">
-            <img src="../viewsnoticias/hola.jpg" id="icono-busqueda" alt="Buscar" style="cursor: pointer;">
-            <input type="text" id="buscador" name="buscador" placeholder="Inserte una búsqueda">
-            <button id="boton-buscar">Buscar</button>
-        </form>
+        
+    </div>
+
     </div>
 
     <div class="menu" id="menu">
@@ -131,48 +118,41 @@ $stmt2->close();
 </nav>
 
 <script>
-    // JavaScript para mostrar/ocultar el buscador
-    const iconoBusqueda = document.getElementById('icono-busqueda');
-    const buscador = document.getElementById('buscador'); // ID del input
-    const botonBuscar = document.getElementById('boton-buscar');
+    // Obtiene el botón de menú y el contenedor del menú
+    const menuButton = document.getElementById('menu');
+    const menuContainer = document.getElementById('categories');
 
-    iconoBusqueda.addEventListener('click', function() {
-        if (buscador.style.display === 'none' || buscador.style.display === '') {
-            botonBuscar.style.display = 'block';
-            buscador.style.display = 'block'; // Muestra el buscador
-            buscador.focus(); // Coloca el foco en el buscador
+    // Escucha el evento de clic en el botón de menú
+    menuButton.addEventListener('click', () => {
+        // Alterna la clase 'active' para el botón de menú y el contenedor del menú
+        menuButton.classList.toggle('active');
+        menuContainer.classList.toggle('active');
+        
+        // Muestra u oculta el menú dependiendo de su estado
+        if (menuContainer.style.display === "flex") {
+            menuContainer.style.display = "none";
         } else {
-            buscador.style.display = 'none'; // Oculta el buscador
-            botonBuscar.style.display = 'none'; // Oculta el botón de búsqueda
-        }
-    });
-
-    // JavaScript para el menú hamburguesa
-    const menu = document.getElementById('menu');
-    const categories = document.getElementById('categories');
-
-    menu.addEventListener('click', () => {
-        menu.classList.toggle('active'); // Cambia la clase del menú
-        // Alternar la visibilidad de las categorías
-        if (categories.style.display === 'flex') {
-            categories.style.display = 'none'; // Ocultar categorías
-        } else {
-            categories.style.display = 'flex'; // Mostrar categorías
+            menuContainer.style.display = "flex";
         }
     });
 </script>
+        <form action="index2.php" method="get">
+            <input type="text" id="buscador" name="buscador" placeholder="Inserte una búsqueda">
+            <button id="boton-buscar">Buscar</button>
+        </form>
 
-</body>
-</html>
 
-<?php while ($noticia = $resultado->fetch_object()) { ?> 
-    <div class="noticia">
-        <h2 class="titulo-noticia"><?php echo $noticia->titulo; ?></h2>
-        <img src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo; ?>" class="imagen-noticiaa">
-        <p class="descripcion-noticia"><?php echo $noticia->descripcion; ?></p>
-        <a href="/tareanueva/viewsnoticias/detalle.php?id=<?php echo $noticia->id; ?>" class="leer-mas">Leer más</a>
-    </div>
-<?php } ?>
+        <div class="contenedor-noticias">
+    <?php while ($noticia = $resultado->fetch_object()) { ?> 
+        <a href="/tareanueva/viewsnoticias/detalle.php?id=<?php echo $noticia->id; ?>" class="noticia">
+            <h2 class="titulo-noticia"><?php echo $noticia->titulo; ?></h2>
+            <img src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo; ?>" class="imagen-noticia">
+            <p class="descripcion-noticia"><?php echo $noticia->descripcion; ?></p>
+            <span class="leer-mas">Leer más</span>
+        </a>
+    <?php } ?>
+</div>
+
 
 <div class="paginacion">
     <?php if ($pagina > 1) { ?>
@@ -191,10 +171,11 @@ $stmt2->close();
         <a href="index2.php?page=<?php echo $pagina + 1 ?>&buscador=<?php echo htmlspecialchars($buscador); ?>">Siguiente</a>
     <?php } ?>
 </div>
+</body>
 
-
-<footer class="footer">
+<footer class="footer"> 
     <div class="footer-content">
+       
         <div class="footer-section about">
             <h2>Mi portal de noticias</h2>
             <p>Una plataforma para mantenerte informado sobre noticias y eventos en la ciudad de Chacabuco.</p>
@@ -217,8 +198,5 @@ $stmt2->close();
         <p>&copy; 2024 Mi portal de noticias. Todos los derechos reservados.</p>
     </div>
 </footer>
-
-
-
 
 </html>

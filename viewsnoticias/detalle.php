@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
         $id_categoria = $noticia->id_categoria; 
         
         //Preparar y ejecutar la consulta para obtener las noticias relacionadas
-        $sentencia2 = $conexion->prepare("SELECT * FROM noticias WHERE id_categoria = ? AND id != ?");
+        $sentencia2 = $conexion->prepare("SELECT * FROM noticias WHERE id_categoria = ? AND id != ? order by fecha limit 0,4");
         $sentencia2->bind_param("ii", $id_categoria, $id);
         $sentencia2->execute();
         $resultado2 = $sentencia2->get_result();
@@ -85,7 +85,7 @@ while ($imagen = $resultado3->fetch_object()) {
             
             <h2><?php echo $noticia->titulo; ?></h2>
             <a href="detalle.php?id=<?php echo $noticia->id; ?>">
-                <img  width = "800" src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo;  ?>">
+                <img  width = "600" src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo;  ?>">
             </a>
         </div>
         
@@ -118,6 +118,34 @@ while ($imagen = $resultado3->fetch_object()) {
         height: 100%;
         object-fit: cover;
     }
+
+    .noticias-relacionadas {
+    display: flex;
+    gap: 25px; /* Espacio entre las noticias */
+    flex-wrap: wrap; /* Permite que las noticias salten a una nueva línea si no caben */
+}
+
+.noticia-relacionada {
+    width: 250px; /* Ajusta el ancho de cada noticia relacionada */
+    flex: 1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+}
+
+.noticia-relacionada img {
+    width: 100%; /* O usa un tamaño específico, como 250px */
+    height: 200px; /* Ajusta el alto según tus necesidades */
+    object-fit: cover;
+}
+
+h2{
+    text-align: center;
+}
+
+.leer-mas{
+    text-align: end;
+}
     </style>
 
 <h2>Noticias Relacionadas</h2>
@@ -125,12 +153,15 @@ while ($imagen = $resultado3->fetch_object()) {
     <?php while ($relacionada = $resultado2->fetch_object()) { ?>
         <div class="noticia-relacionada">
             <h3><?php echo htmlspecialchars($relacionada->titulo); ?></h3>
-            <img width="450" src="<?php echo htmlspecialchars($relacionada->imagen); ?>" alt="<?php echo htmlspecialchars($relacionada->titulo); ?>">
+            <img width="250" src="<?php echo htmlspecialchars($relacionada->imagen); ?>" alt="<?php echo htmlspecialchars($relacionada->titulo); ?>">
             <p><?php echo htmlspecialchars($relacionada->descripcion); ?></p>
             <a href="detalle.php?id=<?php echo $relacionada->id; ?>" class="leer-mas">Leer más</a>
         </div>
     <?php } ?>
 </div>
+
+
+
 
 </body>
 

@@ -1,36 +1,57 @@
+/* Contenedor principal de todas las noticias */
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el tamaño de las columnas */
+    gap: 20px; /* Espacio entre las noticias */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    min-height: 400px;
+}
+
+/* Estilos para cada noticia */
 .noticia {
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 15px;
-    padding: 15px;
+    padding: 20px;
     background-color: #f9f9f9;
+    text-decoration: none;
 }
 
 .titulo-noticia {
     font-size: 1.5em;
     color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+
 }
 
 .imagen-noticia {
-    width: 3%; /* O ajusta según sea necesario */
+    width: 100%; /* Imagen ocupa el ancho completo */
     height: auto;
     border-radius: 5px;
+    object-fit:cover;
+    margin-bottom: 10px;
+    min-height: 200px; /* Establece una altura mínima para las imágenes */
+    max-height: 200px; /* Establece una altura máxima para las imágenes */
 }
 
 .descripcion-noticia {
     font-size: 1em;
     color: #555;
-    margin: 10px 0;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .leer-mas {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
+    display: inline-block; /* Hace que el enlace ocupe todo el ancho del contenedor */
+    margin-top: 10px; /* Añade un margen superior para separarlo del contenido */
+    color: #007bff; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 1em; /* Tamaño de la fuente */
+    text-align: right; /* Centra el texto */
+    margin-left: auto;
 }
 
 .leer-mas:hover {
@@ -78,13 +99,13 @@
 }
 
 .nav-links2 a {
-    color: rgb(24, 21, 21); /* Color del texto de los enlaces */
+    color: rgb(255, 255, 255); /* Color del texto de los enlaces */
     text-decoration: none; /* Sin subrayado */
     padding: 5px 10px; /* Espaciado interno */
 }
 
 .nav-links2 a:hover {
-    background-color: #f8f4f4; /* Color de fondo al pasar el mouse */
+    background-color: #0d0d0e; /* Color de fondo al pasar el mouse */
     border-radius: 5px; /* Bordes redondeados */
 }
 
