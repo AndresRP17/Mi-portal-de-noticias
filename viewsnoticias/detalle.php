@@ -122,21 +122,27 @@ while ($imagen = $resultado3->fetch_object()) {
     .noticias-relacionadas {
     display: flex;
     gap: 25px; /* Espacio entre las noticias */
-    flex-wrap: wrap; /* Permite que las noticias salten a una nueva línea si no caben */
+    text-decoration: none;
+    color: inherit; /* Hereda el color del texto del contenedor */
+    background-color: rgb(200, 212, 235);
+    text-align: center;
+
 }
 
 .noticia-relacionada {
-    width: 250px; /* Ajusta el ancho de cada noticia relacionada */
-    flex: 1;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    text-align: center;
+    background-color: white; /* Fondo individual de cada noticia */
+    box-shadow: 0px 0px 10px rgb(200, 212, 235);
+    ; /* Sombra para simular separación */
+    border-radius: 5px; /* Bordes redondeados para un estilo limpio */
+    padding: 15px; /* Espacio interno en cada tarjeta */
+    width: 100%; /* Puedes ajustar según el diseño deseado */
+    max-width: 300px; /* Tamaño máximo para mantener consistencia */
 }
 
 .noticia-relacionada img {
     width: 100%; /* O usa un tamaño específico, como 250px */
     height: 200px; /* Ajusta el alto según tus necesidades */
-    object-fit: cover;
+    object-fit:fill;
 }
 
 h2{
@@ -146,16 +152,23 @@ h2{
 .leer-mas{
     text-align: end;
 }
-    </style>
+
+.noticia-relacionada a {
+        text-decoration: none; /* Elimina la subrayado de todos los enlaces */
+        color: inherit; /* Hereda el color del texto del contenedor */
+    }
+</style>
 
 <h2>Noticias Relacionadas</h2>
 <div class="noticias-relacionadas">
     <?php while ($relacionada = $resultado2->fetch_object()) { ?>
         <div class="noticia-relacionada">
-            <h3><?php echo htmlspecialchars($relacionada->titulo); ?></h3>
-            <img width="250" src="<?php echo htmlspecialchars($relacionada->imagen); ?>" alt="<?php echo htmlspecialchars($relacionada->titulo); ?>">
-            <p><?php echo htmlspecialchars($relacionada->descripcion); ?></p>
-            <a href="detalle.php?id=<?php echo $relacionada->id; ?>" class="leer-mas">Leer más</a>
+            <a href="detalle.php?id=<?php echo $relacionada->id; ?>">
+                <h3><?php echo htmlspecialchars($relacionada->titulo); ?></h3>
+                <img width="250" src="<?php echo htmlspecialchars($relacionada->imagen); ?>" alt="<?php echo htmlspecialchars($relacionada->titulo); ?>">
+                <p><?php echo htmlspecialchars($relacionada->descripcion); ?></p>
+                <p class="leer-mas">Leer más</p>
+            </a>
         </div>
     <?php } ?>
 </div>

@@ -7,6 +7,7 @@
     margin: 20px auto;
     padding: 20px;
     min-height: 400px;
+    text-decoration: none;
 }
 
 /* Estilos para cada noticia */
@@ -16,6 +17,7 @@
     padding: 20px;
     background-color: #f9f9f9;
     text-decoration: none;
+
 }
 
 .titulo-noticia {
@@ -30,7 +32,6 @@
     width: 100%; /* Imagen ocupa el ancho completo */
     height: auto;
     border-radius: 5px;
-    object-fit:cover;
     margin-bottom: 10px;
     min-height: 200px; /* Establece una altura mínima para las imágenes */
     max-height: 200px; /* Establece una altura máxima para las imágenes */
@@ -43,21 +44,15 @@
     text-align: center;
 }
 
-.leer-mas {
-    display: inline-block; /* Hace que el enlace ocupe todo el ancho del contenedor */
+.leer-mas1 {
     margin-top: 10px; /* Añade un margen superior para separarlo del contenido */
-    color: #007bff; /* Color del enlace */
+    color: #0063d4; /* Color del enlace */
     text-decoration: none; /* Sin subrayado */
     font-weight: bold; /* Texto en negrita */
     font-size: 1em; /* Tamaño de la fuente */
-    text-align: right; /* Centra el texto */
-    margin-left: auto;
+    margin-top: auto;
+    text-align: right;
 }
-
-.leer-mas:hover {
-    background-color: #0056b3;
-}
-
 
 .paginacion {
     display: flex;
@@ -114,3 +109,34 @@
     display: flex; /* Alinea el logo */
     align-items: center; /* Centra verticalmente el contenido del logo */
 }
+
+
+    
+    .input {
+            width: 13%;
+            padding: 10px 40px 10px 20px; /* Espacio para la lupa a la izquierda */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            background-image: url('../viewsnoticias/hola.jpg'); /* Ruta del ícono de lupa */
+            background-position: right; /* Ajuste de posición de la lupa */
+            background-repeat: no-repeat;
+            background-size: 40px 40px; /* Ajusta el tamaño de la lupa */
+        }
+        
+
+    .input:focus {
+        border-color: #007bff; /* Color del borde al enfocar */
+        outline: none; /* Quitar el contorno predeterminado */
+    }
+
+    .input::placeholder {
+        color: #aaa; /* Color del texto del placeholder */
+        font-style: italic; /* Estilo del texto del placeholder */
+    }
+
+    .search-container {
+        position: relative;
+        width: fit-content;
+    }
+    

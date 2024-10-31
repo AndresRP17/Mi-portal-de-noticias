@@ -118,27 +118,27 @@ $stmt2->close();
 </nav>
 
 <script>
-    // Obtiene el botón de menú y el contenedor del menú
-    const menuButton = document.getElementById('menu');
-    const menuContainer = document.getElementById('categories');
+    /// Obtiene el botón de menú y el contenedor del menú
+const menuButton = document.getElementById('menu');
+const menuContainer = document.getElementById('categories');
 
-    // Escucha el evento de clic en el botón de menú
-    menuButton.addEventListener('click', () => {
-        // Alterna la clase 'active' para el botón de menú y el contenedor del menú
-        menuButton.classList.toggle('active');
-        menuContainer.classList.toggle('active');
-        
-        // Muestra u oculta el menú dependiendo de su estado
-        if (menuContainer.style.display === "flex") {
-            menuContainer.style.display = "none";
-        } else {
-            menuContainer.style.display = "flex";
-        }
-    });
+// Escucha el evento de clic en el botón de menú
+menuButton.addEventListener('click', () => {
+    // Alterna la clase 'active' para el botón de menú y el contenedor del menú
+    menuButton.classList.toggle('active');
+    menuContainer.classList.toggle('active'); // Cambia la visibilidad usando la clase
+
+    // Alterna la visibilidad del menú
+    if (menuContainer.classList.contains('active')) {
+        menuContainer.style.display = "flex"; // Muestra el menú
+    } else {
+        menuContainer.style.display = "none"; // Oculta el menú
+    }
+});
+
 </script>
         <form action="index2.php" method="get">
-            <input type="text" id="buscador" name="buscador" placeholder="Inserte una búsqueda">
-            <button id="boton-buscar">Buscar</button>
+            <input type="text" id="buscador"  class="input" name="buscador" placeholder="Inserte una búsqueda">
         </form>
 
 
@@ -148,11 +148,15 @@ $stmt2->close();
             <h2 class="titulo-noticia"><?php echo $noticia->titulo; ?></h2>
             <img src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo; ?>" class="imagen-noticia">
             <p class="descripcion-noticia"><?php echo $noticia->descripcion; ?></p>
-            <span class="leer-mas">Leer más</span>
+            <p class="leer-mas1">Leer más</p>
         </a>
     <?php } ?>
 </div>
-
+<style>
+    .leer-mas1{
+        text-align: right;
+    }
+</style>
 
 <div class="paginacion">
     <?php if ($pagina > 1) { ?>
