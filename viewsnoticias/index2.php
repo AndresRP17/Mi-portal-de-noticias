@@ -75,6 +75,7 @@ $ultima_pagina = ceil($total->cantidad / $offset);
 // Cerrar sentencias
 $stmt->close();
 $stmt2->close();
+
 ?>
 
 
@@ -145,14 +146,23 @@ menuButton.addEventListener('click', () => {
         <div class="contenedor-noticias">
     <?php while ($noticia = $resultado->fetch_object()) { ?> 
         <a href="/tareanueva/viewsnoticias/detalle.php?id=<?php echo $noticia->id; ?>" class="noticia">
-            <h2 class="titulo-noticia"><?php echo $noticia->titulo; ?></h2>
+        <h4 class="titulo-categoria"><?php echo $noticia->categoria_nombre ?? "Sin categoría"; ?></h4> <!-- Muestra la categoría aquí -->
+        <h2 class="titulo-noticia"><?php echo $noticia->titulo; ?></h2>
             <img src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo; ?>" class="imagen-noticia">
             <p class="descripcion-noticia"><?php echo $noticia->descripcion; ?></p>
             <p class="leer-mas1">Leer más</p>
         </a>
     <?php } ?>
 </div>
+
 <style>
+
+.titulo-categoria{
+    color: white;
+    display: inline;
+    background-color: blue
+}
+
     .leer-mas1{
         text-align: right;
     }

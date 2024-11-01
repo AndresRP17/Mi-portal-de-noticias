@@ -5,7 +5,7 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"]; // Obtener el id de la noticia
 
     // Preparar y ejecutar la consulta para obtener la noticia
-    $sentencia = $conexion->prepare("SELECT * FROM noticias WHERE id = ?");
+    $sentencia = $conexion->prepare("SELECT * FROM noticias  WHERE id = ? ");
     $sentencia->bind_param("i", $id);
     $sentencia->execute();
     $resultado = $sentencia->get_result();
@@ -26,11 +26,18 @@ if (isset($_GET["id"])) {
         $id_categoria = $noticia->id_categoria; 
         
         //Preparar y ejecutar la consulta para obtener las noticias relacionadas
-        $sentencia2 = $conexion->prepare("SELECT * FROM noticias WHERE id_categoria = ? AND id != ? order by fecha limit 0,4");
-        $sentencia2->bind_param("ii", $id_categoria, $id);
-        $sentencia2->execute();
-        $resultado2 = $sentencia2->get_result();
-    }
+        $sentencia2 = $conexion->prepare("
+        SELECT noticias.*, categorias.nombre AS categoria_nombre 
+        FROM noticias 
+        LEFT JOIN categorias ON categorias.id = noticias.id_categoria 
+        WHERE noticias.id_categoria = ? AND noticias.id != ? 
+        ORDER BY fecha 
+        LIMIT 0, 4
+    ");
+    $sentencia2->bind_param("ii", $id_categoria, $id);
+    $sentencia2->execute();
+    $resultado2 = $sentencia2->get_result();
+}    
         
 else {
     die("ID de noticia no proporcionado.");
@@ -157,6 +164,13 @@ h2{
         text-decoration: none; /* Elimina la subrayado de todos los enlaces */
         color: inherit; /* Hereda el color del texto del contenedor */
     }
+
+    .detalle-relacion {
+        color: #fff1f1;
+    display: inline;
+    background-color: #0f0f12;
+    }
+
 </style>
 
 <h2>Noticias Relacionadas</h2>
@@ -164,6 +178,8 @@ h2{
     <?php while ($relacionada = $resultado2->fetch_object()) { ?>
         <div class="noticia-relacionada">
             <a href="detalle.php?id=<?php echo $relacionada->id; ?>">
+            <h5 class="detalle-relacion"><?php echo $relacionada->categoria_nombre ?? "Sin categoría"; ?></h5> <!-- Muestra la categoría aquí -->
+
                 <h3><?php echo htmlspecialchars($relacionada->titulo); ?></h3>
                 <img width="250" src="<?php echo htmlspecialchars($relacionada->imagen); ?>" alt="<?php echo htmlspecialchars($relacionada->titulo); ?>">
                 <p><?php echo htmlspecialchars($relacionada->descripcion); ?></p>

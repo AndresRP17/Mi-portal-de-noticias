@@ -81,7 +81,6 @@ if ($operacion === "new") {
     }
 
 } else if ($operacion == "edit") {
-    
     $id = isset($_POST["hidden"]) ? intval($_POST["hidden"]) : 0; 
     $titulo = $_POST["titulo"];
     $descripcion = $_POST["descripcion"];
@@ -96,7 +95,7 @@ if ($operacion === "new") {
         // Procesa la nueva imagen
         $nombreArchivo = $_FILES['imagen']['name'];
         $archivoTmp = $_FILES['imagen']['tmp_name'];
-        $carpetaDestino = 'uploads/';
+        $carpetaDestino = '../viewsnoticias/uploads/';
         $rutaArchivo = $carpetaDestino . basename($nombreArchivo);
 
         if (move_uploaded_file($archivoTmp, $rutaArchivo)) {
@@ -106,7 +105,7 @@ if ($operacion === "new") {
         }
     }
 
-    // Si no se subió una nueva imagen, puedes obtener la imagen actual de la base de datos
+    // Si no se subió una nueva imagen, obtén la imagen actual de la base de datos
     if (empty($imagen)) {
         $sentencia = $conexion->prepare("SELECT imagen FROM noticias WHERE id = ?");
         $sentencia->bind_param("i", $id);
@@ -121,12 +120,36 @@ if ($operacion === "new") {
     $sentencia->bind_param("ssissi", $titulo, $descripcion, $texto, $imagen, $fecha, $id);
     
     if ($sentencia->execute()) {
+        // Ahora manejar la galería de imágenes
+        if (isset($_FILES["upload"]) && count($_FILES["upload"]["name"]) > 0) {
+            $cantidadArchivos = count($_FILES["upload"]["name"]);
+            for ($i = 0; $i < $cantidadArchivos; $i++) {
+                if ($_FILES["upload"]["error"][$i] == 0) {
+                    $archivoEnCache = $_FILES["upload"]["tmp_name"][$i];
+                    $nuevaRuta = generarNombreRuta($_FILES["upload"]["name"][$i]);
+
+                    if (subirImagen($archivoEnCache, $nuevaRuta)) {
+                        // Inserta en la tabla de imágenes de la noticia
+                        $sql = "INSERT INTO noticias_imagenes (id_noticia, ruta_imagen) VALUES (?, ?)";
+                        $stmt_imagen = $conexion->prepare($sql);
+                        $stmt_imagen->bind_param("is", $id, $nuevaRuta); // Cambia $id_noticia por $id
+                        
+                        if (!$stmt_imagen->execute()) {
+                            echo 'Error al insertar la imagen en la base de datos: ' . $stmt_imagen->error;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Redirigir después de actualizar
         header("Location: /tareanueva/admin/noticias.php");
         exit();
     } else {
         echo 'Error al ejecutar la actualización: ' . $sentencia->error;
     }
 
+    
 } else if ($operacion === "delete") {
     $id = intval($_GET["id"]);
     $sentencia = $conexion->prepare("DELETE FROM noticias WHERE id = ?");
@@ -139,7 +162,7 @@ if ($operacion === "new") {
 
 // Funciones para manejar nombres y carga de imágenes
 function generarNombreRuta($nombreArchivo) {
-    $carpeta = "uploads/";
+    $carpeta = "../viewsnoticias/uploads/";
     return $carpeta . date("YmdHis") . "_" . basename($nombreArchivo);
 }
 
