@@ -80,7 +80,7 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
                     <td><img width="100" src="<?php echo $fila->imagen; ?> " /></td>
                     <td> <?php echo $fila->fecha ?></td>
                     <td><a href="/tareanueva/controlesnoti/subirnoti.php?operacion=edit&id=<?php echo $fila->id ?>">Editar</a></td>
-                    <td><a href="/tareanueva//controlesnoti/logicanoti.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar esta noticia?');">Eliminar</a></td>
+                    <td><a href="/tareanueva/controlesnoti/logicanoti.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar esta noticia?');">Eliminar</a></td>
                 </tr>
                 <?php }?> 
     </tbody>

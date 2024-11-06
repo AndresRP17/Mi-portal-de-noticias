@@ -104,24 +104,8 @@ if ($id_categoria > 0) {
 }
 ?>
 
-<style>
-    .contenedorImagen{
-	display: inline-block;
-	width: 20%;
-	height: 200px;
-}
-
-.contenedorImagen img{
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-</style>
 </body>
 </html> 
-
-
 
 <footer class="footer">
     <div class="footer-content">
@@ -147,4 +131,3 @@ if ($id_categoria > 0) {
         <p>&copy; 2024 Mi portal de noticias. Todos los derechos reservados.</p>
     </div>
 </footer>
-

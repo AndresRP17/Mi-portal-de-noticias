@@ -1,46 +1,66 @@
-/* Contenedor principal de todas las noticias */
 .contenedor-noticias {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el tamaño de las columnas */
-    gap: 20px; /* Espacio entre las noticias */
-    max-width: 1200px;
+    gap: 25px; /* Espacio entre las noticias */
+    max-width: 1200px; 
     margin: 20px auto;
-    padding: 20px;
+    padding: 10px;
     min-height: 400px;
-    text-decoration: none;
+    border: #0063d4;
 }
+
 
 /* Estilos para cada noticia */
 .noticia {
     border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: #f9f9f9;
+    border-radius: 25px;
+    padding: 10%;
+    margin: 0%;
+    background-color: rgb(255, 255, 255);
+    display: flex; /* Convertir el contenedor en flex */
+    flex-direction: column; /* Coloca los hijos en columna */
+    justify-content: space-between; /* Distribuye el espacio */
+    height: 100%; /* Asegura que el contenedor ocupe todo el espacio */
     text-decoration: none;
+    box-sizing: border-box;
+    background-position: 100% 100%;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+
+
+}
+
+
+.noticia:hover{
+
+    box-shadow: 0 4px 8px rgba(255, 254, 254, 0.2);
+    border-color: #020202;
+    background-position: 0 0;
+    background-color: #f8f9fa; /* Fondo ligeramente gris para resaltar */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
 
 }
 
 .titulo-noticia {
     font-size: 1.5em;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-align: center;
-
 }
 
 .imagen-noticia {
     width: 100%; /* Imagen ocupa el ancho completo */
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    height: 200%;
+    
     min-height: 200px; /* Establece una altura mínima para las imágenes */
     max-height: 200px; /* Establece una altura máxima para las imágenes */
+    object-fit: fill;
 }
 
 .descripcion-noticia {
     font-size: 1em;
     color: #555;
-    margin-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     text-align: center;
 }
 
@@ -50,8 +70,16 @@
     text-decoration: none; /* Sin subrayado */
     font-weight: bold; /* Texto en negrita */
     font-size: 1em; /* Tamaño de la fuente */
-    margin-top: auto;
+    align-self: flex-end; /* Alinea el botón al final del contenedor */
+    margin-left: auto; /* Asegura que se alinee a la derecha */
+}
+
+
+.leer-mas1:hover{
+    background-color: #0772ff !important;
     text-align: right;
+    justify-content: right;
+    color: #fff8f8;
 }
 
 .paginacion {
@@ -140,3 +168,101 @@
         width: fit-content;
     }
     
+    .contenedorImagen{
+        display: flex;
+        width: 20%;
+        height: 200px;
+    }
+    
+    .contenedorImagen img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .noticias-relacionadas {
+    display: flex;
+    gap: 25px; /* Espacio entre las noticias */
+    text-decoration: none;
+    color: inherit; /* Hereda el color del texto del contenedor */
+    background-color: rgb(200, 212, 235);
+    text-align: center;
+
+}
+
+
+.noticia-relacionada {
+    background-color: white; /* Fondo individual de cada noticia */
+    box-shadow: -10px -10px 10px rgb(200, 212, 235);
+    border-radius: 25px; /* Bordes redondeados para un estilo limpio */
+    padding: 15px; /* Espacio interno en cada tarjeta */
+    width: 100%; /* Puedes ajustar según el diseño deseado */
+    max-width: 300px; /* Tamaño máximo para mantener consistencia */
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+
+}
+
+.noticia-relacionada:hover{
+    box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+    background-color: #f8f9fa; /* Fondo ligeramente gris para resaltar */
+    border-color: #020202;
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+.noticia-relacionada img {
+    width: 100%; /* O usa un tamaño específico, como 250px */
+    height: 200px; /* Ajusta el alto según tus necesidades */
+    object-fit:fill;
+}
+
+h2{
+    text-align: center;
+}
+
+.leer-mas{
+    display: inline;
+    float: right;
+    background-color: white;
+}
+
+.leer-mas:hover{
+    background-color: black;
+    color: white;
+}
+
+.noticia-relacionada a {
+        text-decoration: none; /* Elimina la subrayado de todos los enlaces */
+        color: inherit; /* Hereda el color del texto del contenedor */
+    }
+
+    .detalle-relacion {
+    color: #fff1f1;   
+    display: inline-block;
+    background-color: #0f0f12; 
+    margin-bottom: 10px;
+    }
+
+
+.fecha-relacionada{
+    color: #0f0f12;
+    font-size: small;
+    text-align: left;
+}
+
+.titulo-relacion{
+    text-align: center;
+    margin-top: 10px;
+    float: none;
+}
+
+.contenedorImagen{
+	display: inline-block;
+	width: 20%;
+	height: 200px;
+}
+
+.contenedorImagen img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

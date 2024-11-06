@@ -60,16 +60,27 @@ body {
     gap: 8px;
 }
 
+
+.menu:hover{
+    background-color: rgb(0, 0, 0);
+    color: rgb(236, 228, 228);
+}
+
+
 .bar {
     display: block; /* Las barras se muestran como bloques */
     width: 40px; /* Ancho completo del contenedor */
     height: 3px; /* Ajusta la altura de las barras */
     border-radius: 5px;
     background-color: #fdf3f3; /* Color de las barras */
-    transition: 200ms ease-in-out; /* Transición suave */
+    transition: 300ms ease-in-out; /* Transición suave */
 
 }
 
+.bar:hover{
+    background-color: #f3f3f3;
+    color: #fffdfd;
+}
 
 
 /* Contenedor del menú desplegable */
@@ -149,6 +160,7 @@ body {
 .footer-section h2 {
     font-size: 18px;
     margin-bottom: 15px;
+    text-align: left;
 }
 
 .footer-section p,
@@ -216,3 +228,25 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.fecha{
+    text-align: left; 
+    font-size: small;
+    text-decoration: none;
+    color: black;
+}
+
+.titulo-categoria{
+    color: blue;
+    display: inline;
+    background-color: #fefeff;
+    font-size: smaller;
+}
+
+    .leer-mas1{
+        text-align: right;
+    }
+
+    .descripcion-noticia{
+        color: #cedae7;
+    }

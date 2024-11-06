@@ -49,6 +49,8 @@ if (isset($_GET["id"])) {
 
         <label>INSERTE UNA CATEGORÍA</label>
         <select name="id_categoria" id="categoria">
+            <option value="3" <?php echo (isset($noticia->id_categoria) && $noticia->id_categoria == 3) ? 'selected' : ''; ?>>Accidentes</option>
+            <option value="5" <?php echo (isset($noticia->id_categoria) && $noticia->id_categoria == 5) ? 'selected' : ''; ?>>Politica</option>
             <option value="6" <?php echo (isset($noticia->id_categoria) && $noticia->id_categoria == 6) ? 'selected' : ''; ?>>Entretenimientos</option>
             <option value="1" <?php echo (isset($noticia->id_categoria) && $noticia->id_categoria == 1) ? 'selected' : ''; ?>>Deportes</option>
             <option value="4" <?php echo (isset($noticia->id_categoria) && $noticia->id_categoria == 4) ? 'selected' : ''; ?>>Música</option>

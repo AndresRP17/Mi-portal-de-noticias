@@ -1,9 +1,4 @@
-<?php
-
-
-require_once('../panel/includes/db.php');
-
-
+<?php require_once('../panel/includes/db.php');
 
 $operacion = $_GET["operacion"] ?? '';
 
@@ -84,12 +79,12 @@ if ($operacion === "new") {
     $id = isset($_POST["hidden"]) ? intval($_POST["hidden"]) : 0; 
     $titulo = $_POST["titulo"];
     $descripcion = $_POST["descripcion"];
-    $texto = $_POST["texto"];
+    $texto = !empty($_POST['texto']) ? $_POST['texto'] : null; // Usa null si está vacío
     $fecha = isset($_POST['fecha']) && !empty($_POST['fecha']) ? $_POST['fecha'] : date('Y-m-d H:i:s');
+    $id_categoria = isset($_POST['id_categoria']) ? intval($_POST['id_categoria']) : 0; 
 
     // Inicializa la variable de imagen
     $imagen = '';
-
     // Verifica si se subió una nueva imagen
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
         // Procesa la nueva imagen
@@ -104,7 +99,6 @@ if ($operacion === "new") {
             echo 'Error al mover la nueva imagen destacada.';
         }
     }
-
     // Si no se subió una nueva imagen, obtén la imagen actual de la base de datos
     if (empty($imagen)) {
         $sentencia = $conexion->prepare("SELECT imagen FROM noticias WHERE id = ?");
@@ -114,10 +108,9 @@ if ($operacion === "new") {
         $noticia = $resultado->fetch_object();
         $imagen = $noticia->imagen; // Mantén la imagen existente
     }
-
     // Ahora actualiza la base de datos
     $sentencia = $conexion->prepare("UPDATE noticias SET titulo = ?, descripcion = ?, texto = ?, imagen = ?, fecha = ? WHERE id = ?");
-    $sentencia->bind_param("ssissi", $titulo, $descripcion, $texto, $imagen, $fecha, $id);
+    $sentencia->bind_param("sssssi", $titulo, $descripcion, $texto, $imagen, $fecha, $id);
     
     if ($sentencia->execute()) {
         // Ahora manejar la galería de imágenes
@@ -147,6 +140,7 @@ if ($operacion === "new") {
         exit();
     } else {
         echo 'Error al ejecutar la actualización: ' . $sentencia->error;
+        echo $_POST['texto'];
     }
 
     

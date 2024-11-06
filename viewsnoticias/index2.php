@@ -110,16 +110,19 @@ $stmt2->close();
 
     <div class="menu_container" id="categories">
         <ul class="nav-links">
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">Accidentes</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">Entretenimientos</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">Deportes</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">Música</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">Politica</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">Otros</a></li>
         </ul>
     </div>
 </nav>
 
 <script>
-    /// Obtiene el botón de menú y el contenedor del menú
+
+/// Obtiene el botón de menú y el contenedor del menú
 const menuButton = document.getElementById('menu');
 const menuContainer = document.getElementById('categories');
 
@@ -135,9 +138,9 @@ menuButton.addEventListener('click', () => {
     } else {
         menuContainer.style.display = "none"; // Oculta el menú
     }
-});
-
+})
 </script>
+
         <form action="index2.php" method="get">
             <input type="text" id="buscador"  class="input" name="buscador" placeholder="Inserte una búsqueda">
         </form>
@@ -148,25 +151,13 @@ menuButton.addEventListener('click', () => {
         <a href="/tareanueva/viewsnoticias/detalle.php?id=<?php echo $noticia->id; ?>" class="noticia">
         <h4 class="titulo-categoria"><?php echo $noticia->categoria_nombre ?? "Sin categoría"; ?></h4> <!-- Muestra la categoría aquí -->
         <h2 class="titulo-noticia"><?php echo $noticia->titulo; ?></h2>
-            <img src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo; ?>" class="imagen-noticia">
-            <p class="descripcion-noticia"><?php echo $noticia->descripcion; ?></p>
-            <p class="leer-mas1">Leer más</p>
+        <img src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo; ?>" class="imagen-noticia">
+         <h2 class="fecha"><?php echo $noticia->fecha; ?></h2>
+        <p class="descripcion-noticia"><?php echo $noticia->descripcion; ?></p>
+        <p class="leer-mas1">Leer más</p>
         </a>
     <?php } ?>
 </div>
-
-<style>
-
-.titulo-categoria{
-    color: white;
-    display: inline;
-    background-color: blue
-}
-
-    .leer-mas1{
-        text-align: right;
-    }
-</style>
 
 <div class="paginacion">
     <?php if ($pagina > 1) { ?>

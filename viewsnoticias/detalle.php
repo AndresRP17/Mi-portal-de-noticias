@@ -72,7 +72,6 @@ while ($imagen = $resultado3->fetch_object()) {
 <body>
 
 
-
 <header>
 <nav class="navbar">
         <div class="logo">
@@ -113,84 +112,22 @@ while ($imagen = $resultado3->fetch_object()) {
 		<?php } ?>
 	</div>
 
-    <style>
-        .contenedorImagen{
-        display: inline-block;
-        width: 20%;
-        height: 200px;
-    }
-    
-    .contenedorImagen img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .noticias-relacionadas {
-    display: flex;
-    gap: 25px; /* Espacio entre las noticias */
-    text-decoration: none;
-    color: inherit; /* Hereda el color del texto del contenedor */
-    background-color: rgb(200, 212, 235);
-    text-align: center;
-
-}
-
-.noticia-relacionada {
-    background-color: white; /* Fondo individual de cada noticia */
-    box-shadow: 0px 0px 10px rgb(200, 212, 235);
-    ; /* Sombra para simular separación */
-    border-radius: 5px; /* Bordes redondeados para un estilo limpio */
-    padding: 15px; /* Espacio interno en cada tarjeta */
-    width: 100%; /* Puedes ajustar según el diseño deseado */
-    max-width: 300px; /* Tamaño máximo para mantener consistencia */
-}
-
-.noticia-relacionada img {
-    width: 100%; /* O usa un tamaño específico, como 250px */
-    height: 200px; /* Ajusta el alto según tus necesidades */
-    object-fit:fill;
-}
-
-h2{
-    text-align: center;
-}
-
-.leer-mas{
-    text-align: end;
-}
-
-.noticia-relacionada a {
-        text-decoration: none; /* Elimina la subrayado de todos los enlaces */
-        color: inherit; /* Hereda el color del texto del contenedor */
-    }
-
-    .detalle-relacion {
-        color: #fff1f1;
-    display: inline;
-    background-color: #0f0f12;
-    }
-
-</style>
-
 <h2>Noticias Relacionadas</h2>
 <div class="noticias-relacionadas">
     <?php while ($relacionada = $resultado2->fetch_object()) { ?>
+        
         <div class="noticia-relacionada">
             <a href="detalle.php?id=<?php echo $relacionada->id; ?>">
             <h5 class="detalle-relacion"><?php echo $relacionada->categoria_nombre ?? "Sin categoría"; ?></h5> <!-- Muestra la categoría aquí -->
-
-                <h3><?php echo htmlspecialchars($relacionada->titulo); ?></h3>
+                <h3 class="titulo-relacion"><?php echo htmlspecialchars($relacionada->titulo); ?></h3>
                 <img width="250" src="<?php echo htmlspecialchars($relacionada->imagen); ?>" alt="<?php echo htmlspecialchars($relacionada->titulo); ?>">
                 <p><?php echo htmlspecialchars($relacionada->descripcion); ?></p>
+                <p class="fecha-relacionada"><?php echo $relacionada->fecha; ?></p>
                 <p class="leer-mas">Leer más</p>
             </a>
         </div>
     <?php } ?>
 </div>
-
-
-
 
 </body>
 
