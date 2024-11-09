@@ -1,0 +1,227 @@
+/* Estilos generales para la barra de navegación */
+
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0056b3;
+    padding: 15px 20px;
+    position: relative; /* Mantener la posición relativa para el menú desplegable */
+}
+
+.navbar .logo h1 a {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    color: #fff; /* Color del texto */
+    font-size: 24px; /* Tamaño del texto */
+}
+
+.nav-links {
+    list-style: none; /* Elimina los puntos de la lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Utilizamos Flexbox para alinear los enlaces horizontalmente */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Espaciado entre los enlaces */
+}
+
+.nav-links a {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    color: #fff; /* Color del texto */
+    font-size: 18px; /* Tamaño del texto */
+    padding: 8px 15px; /* Espaciado dentro del enlace */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+.nav-links a:hover {
+    background-color: #555; /* Color de fondo cuando el enlace es hover */
+}
+
+/* Estilos para el enlace "Agregar noticia" */
+.agregarnoticia {
+    display: inline-block;
+    background-color: #0818ff; /* Fondo verde */
+    color: white; /* Color de texto */
+    padding: 10px 20px; /* Espaciado dentro del enlace */
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 18px; /* Tamaño de fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-top: 20px; /* Espaciado superior */
+    transition: background-color 0.3s ease; /* Transición al pasar el ratón */
+}
+
+.agregarnoticia:hover {
+    background-color: #0c038b; /* Fondo cuando pasa el ratón */
+}
+
+
+.subirnoticia {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+}
+
+form input[type="text"]{
+        width: 100%; /* Ancho al 100% del contenedor */
+        height: 50px; /* Cambia la altura a 40px */
+        font-size: 16px; /* Tamaño de fuente más grande */
+        padding: 8px; /* Espacio interno */
+        box-sizing: border-box; /* Asegura que el ancho incluya el padding */
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+form textarea{
+
+        width: 100%; /* Ancho al 100% del contenedor */
+        height: 50px; /* Cambia la altura a 40px */
+        font-size: 16px; /* Tamaño de fuente más grande */
+        padding: 8px; /* Espacio interno */
+        box-sizing: border-box; /* Asegura que el ancho incluya el padding */
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+
+
+
+form input[type="datetime-local"],
+form input[type="file"],
+form select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en columnas */
+}
+
+form label {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+form input[type="file"] {
+    padding: 5px;
+}
+
+form input[type="text"]:focus,
+form input[type="datetime-local"]:focus,
+form select:focus {
+    border-color: #007bff; /* Cambia el color del borde al hacer clic */
+    outline: none; /* Quita el borde adicional */
+}
+
+form input[type="submit"] {
+    background-color: #007bff; /* Color de fondo azul */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3; /* Oscurecer el color al pasar el cursor */
+}
+
+
+/* Estilos para los botones de editar y eliminar en la tabla */
+.tabla-categorias .btn-editar, .tabla-categorias .btn-eliminar {
+    text-decoration: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.tabla-categorias .btn-editar {
+    background-color: #28a745; /* Verde para editar */
+}
+
+.tabla-categorias .btn-editar:hover {
+    background-color: #218838; /* Un verde más oscuro al hacer hover */
+    transform: translateY(-2px); /* Efecto de desplazamiento para el hover */
+}
+
+.tabla-categorias .btn-eliminar {
+    background-color: #dc3545; /* Rojo para eliminar */
+}
+
+.tabla-categorias .btn-eliminar:hover {
+    background-color: #c82333; /* Un rojo más oscuro al hacer hover */
+    transform: translateY(-2px); /* Efecto de desplazamiento para el hover */
+}
+
+.tabla-categorias .btn-editar, .tabla-categorias .btn-eliminar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.tabla-categorias .btn-editar:active, .tabla-categorias .btn-eliminar:active {
+    transform: translateY(2px); /* Efecto de presionar el botón */
+}
+
+
+/* Estilos para los enlaces de editar y eliminar */
+.editarnoti, .eliminarnoti {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    padding: 8px 15px; /* Espaciado interno */
+    color: white; /* Texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño de fuente */
+    font-weight: bold; /* Poner el texto en negrita */
+    text-align: center; /* Alinear texto al centro */
+    display: inline-block; /* Mostrar como un bloque en línea */
+    cursor: pointer; /* Cambio del cursor al pasar el ratón */
+    transition: background-color 0.3s, transform 0.2s; /* Transición de color de fondo y transformación */
+}
+
+/* Estilo para el botón de Editar */
+.editarnoti {
+    background-color: #28a745; /* Verde para el botón de editar */
+}
+
+.editarnoti:hover {
+    background-color: #218838; /* Verde más oscuro cuando se pasa el ratón */
+    transform: translateY(-2px); /* Efecto de elevar el botón */
+}
+
+/* Estilo para el botón de Eliminar */
+.eliminarnoti {
+    background-color: #dc3545; /* Rojo para el botón de eliminar */
+}
+
+.eliminarnoti:hover {
+    background-color: #c82333; /* Rojo más oscuro cuando se pasa el ratón */
+    transform: translateY(-2px); /* Efecto de elevar el botón */
+}
+
+/* Efecto de presionar el botón */
+.editarnoti:active, .eliminarnoti:active {
+    transform: translateY(2px); /* El botón se "presiona" hacia abajo */
+}
+
+/* Agregar una sombra sutil */
+.editarnoti, .eliminarnoti {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}

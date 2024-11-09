@@ -86,8 +86,8 @@ $stmt2->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi portal de noticias</title>
-    <link rel="stylesheet" href="../diseños/diseño.css">
-    <link rel="stylesheet" href="../diseños/diseño2.css">  
+    <link rel="stylesheet" href="../estilos/estilo1.css">
+    <link rel="stylesheet" href="../estilos/estilo2.css">  
 </head>
 
 
@@ -111,8 +111,8 @@ $stmt2->close();
     <div class="menu_container" id="categories">
         <ul class="nav-links">
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">Accidentes</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">Entretenimientos</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">Deportes</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">Entretenimientos</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">Música</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">Politica</a></li>
             <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">Otros</a></li>

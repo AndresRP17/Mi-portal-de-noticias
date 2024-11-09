@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorias</title>
-    <link rel="stylesheet" href="../diseños/diseño.css">
-    <link rel="stylesheet" href="../diseños/diseño2.css">
+    <link rel="stylesheet" href="../estilos/estilo1.css">
+    <link rel="stylesheet" href="../estilos/estilo2.css">
         
 <nav class="navbar">
         <div class="logo">

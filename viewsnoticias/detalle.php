@@ -5,11 +5,19 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"]; // Obtener el id de la noticia
 
     // Preparar y ejecutar la consulta para obtener la noticia
-    $sentencia = $conexion->prepare("SELECT * FROM noticias  WHERE id = ? ");
-    $sentencia->bind_param("i", $id);
-    $sentencia->execute();
-    $resultado = $sentencia->get_result();
-    $noticia = $resultado->fetch_object();
+$sentencia = $conexion->prepare("
+SELECT * FROM noticias WHERE id= ?");
+
+// Enlazar el parámetro utilizando `bind_param` de MySQLi
+$sentencia->bind_param("i", $id);
+
+// Ejecutar la consulta
+$sentencia->execute();
+
+// Obtener el resultado
+$resultado = $sentencia->get_result();
+$noticia = $resultado->fetch_assoc();
+
 
     if ($noticia) {
         // Continúa con el resto del código
@@ -20,14 +28,13 @@ if (isset($_GET["id"])) {
     die("ID de noticia no proporcionado.");
 }
 
-
     // Obtener la categoría de la noticia
     if ($noticia){
-        $id_categoria = $noticia->id_categoria; 
+        $id_categoria = $noticia['id_categoria']; // Acceso como índice de array
         
         //Preparar y ejecutar la consulta para obtener las noticias relacionadas
         $sentencia2 = $conexion->prepare("
-        SELECT noticias.*, categorias.nombre AS categoria_nombre 
+        SELECT noticias.*, categorias.nombre AS categoria_nombre
         FROM noticias 
         LEFT JOIN categorias ON categorias.id = noticias.id_categoria 
         WHERE noticias.id_categoria = ? AND noticias.id != ? 
@@ -38,10 +45,30 @@ if (isset($_GET["id"])) {
     $sentencia2->execute();
     $resultado2 = $sentencia2->get_result();
 }    
-        
+
 else {
     die("ID de noticia no proporcionado.");
 }
+
+
+$sqlUsuarios = "SELECT noticias.*, usuarios.nombre AS autor_nombre
+                FROM noticias
+                INNER JOIN usuarios ON usuarios.id = noticias.id_usuario
+                WHERE noticias.id = ?";
+$stmt = $conexion->prepare($sqlUsuarios);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$resultado3 = $stmt->get_result();
+$stmt->close();
+
+// Si la noticia fue encontrada, accedes a los datos:
+if ($resultado3->num_rows > 0) {
+    $noticia = $resultado3->fetch_assoc();
+    $autor = $noticia['autor_nombre']; // Accede al nombre del autor
+} else {
+    die("Noticia no encontrada.");
+}
+
 
 
 $sqlImagenes = "SELECT * FROM noticias_imagenes WHERE id_noticia = ?";
@@ -64,8 +91,8 @@ while ($imagen = $resultado3->fetch_object()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de Noticia</title>
-    <link rel="stylesheet" href="../diseños/diseño.css">
-    <link rel="stylesheet" href="../diseños/diseño2.css">
+    <link rel="stylesheet" href="../estilos/estilo1.css">
+    <link rel="stylesheet" href="../estilos/estilo2.css">
 
 </head>
 
@@ -89,16 +116,19 @@ while ($imagen = $resultado3->fetch_object()) {
     <div>
         <div style="text-align: center;">
             
-            <h2><?php echo $noticia->titulo; ?></h2>
-            <a href="detalle.php?id=<?php echo $noticia->id; ?>">
-                <img  width = "600" src="<?php echo $noticia->imagen; ?>" alt="<?php echo $noticia->titulo;  ?>">
-            </a>
-        </div>
-        
+        <h2><?php echo $noticia['titulo']; ?></h2> <!-- Acceder a 'titulo' como un índice de array -->
+<a href="detalle.php?id=<?php echo $noticia['id']; ?>"> <!-- Acceder a 'id' como un índice de array -->
+    <img width="600" src="<?php echo $noticia['imagen']; ?>" alt="<?php echo $noticia['titulo']; ?>"> <!-- Acceder a 'imagen' y 'titulo' como índices de array -->
+</a>
+
+</div>
+
+<p><?php echo $noticia['descripcion']; ?></p> <!-- Acceder a 'contenido' como índice de array -->
+<p><?php echo $noticia['texto']; ?></p> <!-- Acceder a 'categoria_nombre' como índice de array -->
+<p>Autor/a: <?php echo $noticia['autor_nombre']; ?></p> <!-- Mostrar el autor -->
+
     </div>
-            <p><?php echo $noticia->fecha; ?></p>
-            <p><?php echo $noticia->descripcion; ?></p>
-            <p><?php echo $noticia->texto; ?></p>
+
             
         </div>
     </div>

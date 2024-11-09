@@ -1,14 +1,24 @@
+<?php
+session_start(); // Reanudar la sesión
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['logueado']) || $_SESSION['logueado'] !== true) {
+    header("Location: ../programacion2/login.php"); // Si no está logueado, redirigir al login
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../estilos/estilo3.css">
 </head>
 <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4; /* Color de fondo */
+            background-color:white;
             margin: 20px;
         }
 
@@ -26,12 +36,8 @@
         }
 
         th {
-            background-color: #4CAF50; /* Color de fondo de los encabezados */
+            background-color: blue; /* Color de fondo de los encabezados */
             color: white; /* Color del texto en encabezados */
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* Color de fondo para filas pares */
         }
 
         tr:hover {
@@ -40,18 +46,29 @@
     </style>
 <body>
 
-
-<a href="/tareanueva/controlesnoti/subirnoti.php">Agregar</a>
-
-<a href="/tareanueva/admin/index.php">Volver</a>
-
-
 <?php
 //aca enlazas el archivo que creaste anteriormente y metes la variable//
 include("../panel/includes/db.php");//Es por la ubicacion del archivo en PHP!!!
 $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
 ?>
 
+<nav class="navbar">
+    <div class="logo">
+        <h1 class="titulo"><a href="/tareanueva/admin/noticias.php">Mi portal de noticias</a></h1>
+    </div>
+    <ul class="nav-links">
+        <li><a href="http://localhost/tareanueva/viewsnoticias/index2.php">Pagina de noticias</a></li>
+        <li><a href="/tareanueva/panel/views/usuarios/listado.php">Autores</a></li>
+
+        <li><a href="/tareanueva/admin/categoria.php">Categorias</a></li>
+        <li><a href="/Programacion2/login.php">Cerrar sesión</a></li>
+    </ul>
+</nav>
+
+
+<div>
+<a class="agregarnoticia" href="/tareanueva/controlesnoti/subirnoti.php">Agregar</a>
+</div>
 <table><!-- Aca haces la tabla normal-->
             <thead>
                 <tr>
@@ -79,8 +96,8 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
                     <td> <?php echo $fila->texto ?></td>
                     <td><img width="100" src="<?php echo $fila->imagen; ?> " /></td>
                     <td> <?php echo $fila->fecha ?></td>
-                    <td><a href="/tareanueva/controlesnoti/subirnoti.php?operacion=edit&id=<?php echo $fila->id ?>">Editar</a></td>
-                    <td><a href="/tareanueva/controlesnoti/logicanoti.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar esta noticia?');">Eliminar</a></td>
+                    <td><a class="editarnoti" href="/tareanueva/controlesnoti/subirnoti.php?operacion=edit&id=<?php echo $fila->id ?>">Editar</a></td>
+                    <td><a class="eliminarnoti" href="/tareanueva/controlesnoti/logicanoti.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar esta noticia?');">Eliminar</a></td>
                 </tr>
                 <?php }?> 
     </tbody>

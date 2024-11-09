@@ -11,6 +11,7 @@ if ($operacion === "new") {
         $descripcion = isset($_POST['descripcion']) ? trim($_POST['descripcion']) : '';
         $fecha = isset($_POST['fecha']) && !empty($_POST['fecha']) ? trim($_POST['fecha']) : date('Y-m-d H:i:s');
         $id_categoria = isset($_POST['id_categoria']) ? intval($_POST['id_categoria']) : 0; 
+        $id_usuario = isset($_POST['id_usuario']) ? intval($_POST['id_usuario']) : 0;
 
         // Manejo de la imagen destacada
         $imagen = '';
@@ -69,6 +70,12 @@ if ($operacion === "new") {
             } else {
                 echo 'Error al ejecutar la consulta: ' . $stmt->error;
             }
+
+            
+        if ($exito) { // Suponiendo que $exito indica si se guardó con éxito
+        header("Location: formulario.php?mensaje=exito");
+        exit();
+        }
             $stmt->close();
         } else {
             echo 'No se ha cargado una imagen válida o la categoría es inválida.';
@@ -82,6 +89,7 @@ if ($operacion === "new") {
     $texto = !empty($_POST['texto']) ? $_POST['texto'] : null; // Usa null si está vacío
     $fecha = isset($_POST['fecha']) && !empty($_POST['fecha']) ? $_POST['fecha'] : date('Y-m-d H:i:s');
     $id_categoria = isset($_POST['id_categoria']) ? intval($_POST['id_categoria']) : 0; 
+    $id_usuario = isset($_POST['id_usuario']) ? intval($_POST['id_usuario']) : 0;
 
     // Inicializa la variable de imagen
     $imagen = '';
@@ -149,6 +157,8 @@ if ($operacion === "new") {
     $sentencia = $conexion->prepare("DELETE FROM noticias WHERE id = ?");
     $sentencia->bind_param("i", $id);
     $sentencia->execute();
+
+
 
     header("Location: /tareanueva/admin/noticias.php");
     exit();

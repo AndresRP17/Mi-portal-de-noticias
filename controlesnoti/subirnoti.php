@@ -9,6 +9,7 @@ if (isset($_GET["id"])) {
     $sentencia->execute();
     $resultado = $sentencia->get_result();
     $noticia = $resultado->fetch_object();
+
 }
 ?>
 
@@ -17,14 +18,23 @@ if (isset($_GET["id"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($noticia) ? "EDITAR NOTICIA" : "EDITAR NOTICIA"; ?></title>
-</head>
+    <title>Noticiasphp</title>
+    <link rel="stylesheet" href="../estilos/estilo3.css">
+ </head>
 <body>
 
-<h1><?php echo isset($noticia) ? "EDITAR NOTICIA" : "NUEVA NOTICIA"; ?></h1>
+<style>
+    .body{
+        color: red;
+    }
+</style>
+<h1><?php echo isset($noticia) ? "EDITAR NOTICIA" : "CREAR NUEVA NOTICIA"; ?></h1>
 
-<div>
-    <form action="/tareanueva/controlesnoti/logicanoti.php?operacion=<?php echo isset($noticia) ? 'edit' : 'new'; ?>" method="post" enctype="multipart/form-data">
+<div class="subirnoticia">
+
+    <div id="mensaje" style="display: none; color: green; font-weight: bold;">¡Su noticia se ha subido correctamente!</div>
+
+    <form  id="miFormulario" action="/tareanueva/controlesnoti/logicanoti.php?operacion=<?php echo isset($noticia) ? 'edit' : 'new'; ?>" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="hidden" value="<?php echo isset($noticia->id) ? $noticia->id : ""; ?>">
 
@@ -35,13 +45,15 @@ if (isset($_GET["id"])) {
         <input type="text" name="descripcion" value="<?php echo isset($noticia->descripcion) ? htmlspecialchars($noticia->descripcion) : ""; ?>" placeholder="Ingrese una descripción" required><br>
 
         <label>TEXTO</label>
-        <input type="text" name="texto" value="<?php echo isset($noticia->texto) ? htmlspecialchars($noticia->texto) : ""; ?>" placeholder="Ingrese un texto"><br>
+        <textarea name="texto" placeholder="Ingrese un texto" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"><?php echo isset($noticia->texto) ? htmlspecialchars($noticia->texto) : ""; ?></textarea><br>
 
         <label>IMAGEN</label>
-        <input type="file" name="imagen"><br>
+        <input type="file" name="imagen" <?php echo (!isset($_GET['id'])) ? 'required' : ''; ?>><br>
+
 
         <label>GALERÍA DE IMÁGENES</label>
-        <input type="file" name="upload[]" multiple><br>
+        <input type="file" name="upload[]" multiple <?php echo (!isset($_GET['id'])) ? 'required' : ''; ?>><br>
+
 
         <label>FECHA</label>
         <input type="datetime-local" name="fecha" value="<?php echo isset($noticia->fecha) ? date('Y-m-d\TH:i', strtotime($noticia->fecha)) : ""; ?>" required><br>
@@ -57,9 +69,46 @@ if (isset($_GET["id"])) {
             <option value="12" <?php echo (isset($noticia->id_categoria) && $noticia->id_categoria == 12) ? 'selected' : ''; ?>>Otros</option>
         </select><br>
 
+        <label>INSERTE QUIEN ESCRIBIO LA NOTICIA</label>
+        <select name="id_usuario" id="usuario">
+            <option value="1">Andres</option>
+            <option value="2">Leonardo</option>
+            <option value="3">Francis</option>
+            <option value="4">Gisela</option>
+            <option value="5">Martin</option>
+            <option value="6">Valeria</option>
+            <option value="7">Valentina</option>
+
+        </select>
+
+
         <input type="submit" value="Enviar">
     </form>
 </div>
+
+    <script>
+    document.getElementById('miFormulario').onsubmit = function(event) {
+        // Evita que el formulario se envíe directamente, si deseas ver la alerta antes de enviarlo al servidor
+        event.preventDefault();
+
+        // Lógica para enviar el formulario al servidor (si quieres enviar manualmente el formulario con JS, usa fetch o AJAX)
+
+        // Mostrar el mensaje de confirmación
+        alert("¡Se ha subido correctamente!");
+
+        // Si deseas que el formulario se envíe después de mostrar la alerta, quita el event.preventDefault() y deja solo el alert()
+        this.submit();
+    }
+</script>
+
+
+</script>
+
+
+<?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'exito'): ?>
+    <div style="color: green; font-weight: bold;">¡Se ha subido correctamente!</div>
+<?php endif; ?>
+
 
 </body>
 </html>

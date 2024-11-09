@@ -13,18 +13,112 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
 </head>
 <body>
     <style>
-        a{
-            text-decoration: none;
-            color: #007bff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        a:hover {
-            background-color: #007bff;
-            color: #fff;
-        }
-        
+     /* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Estilo del enlace 'Agregar' */
+a {
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Estilo del enlace 'Volver' */
+a.volver {
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.volver:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Encabezados de la tabla */
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 18px;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Filas de la tabla */
+td {
+    padding: 10px;
+    font-size: 16px;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Enlaces de la tabla */
+td a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+td a:hover {
+    background-color: #1976D2;
+}
+
+/* Estilo del botón eliminar */
+td a:nth-child(2) {
+    background-color: #f44336;
+}
+
+td a:nth-child(2):hover {
+    background-color: #e53935;
+}
+
+/* Mensaje de confirmación */
+td a:active {
+    transform: scale(0.98);
+}
+
     </style>
 
 <a href="/tareanueva/panel/views/usuarios/formulario.php">Agregar</a>
@@ -33,8 +127,9 @@ $resultado = $conexion->query("SELECT * FROM usuarios");
                 <tr>
                     <th>ID</th>
                     <th>NOMBRE</th>
+                    <th>ACCIONES</th>
                 </tr>
-                <a href="/tareanueva/admin/index.php">Volver</a>
+                <a href="/tareanueva/admin/noticias.php">Volver</a>
             </thead>
             <tbody><!-- Aca repetis la tabla pero utilizando el bucle while para ir actualizando con php-->
             <?php while ($fila = $resultado->fetch_object()) { ?> 
