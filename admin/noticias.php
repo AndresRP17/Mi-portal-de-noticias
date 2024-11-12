@@ -17,9 +17,9 @@ if (!isset($_SESSION['logueado']) || $_SESSION['logueado'] !== true) {
 </head>
 <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: sans-serif;
             background-color:white;
-            margin: 20px;
+            margin: 0px;
         }
 
         table {
@@ -52,19 +52,75 @@ include("../panel/includes/db.php");//Es por la ubicacion del archivo en PHP!!!
 $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
 ?>
 
-<nav class="navbar">
-    <div class="logo">
-        <h1 class="titulo"><a href="/tareanueva/admin/noticias.php">Mi portal de noticias</a></h1>
+<header>
+    <a href="#" class="logo">
+        <img src="luffy.jpg" alt="Logo de la empresa">
+        <h2>Mi portal de noticias</h2>
+    </a>
+
+    <nav>
+        <a href="/tareanueva/viewsnoticias/index2.php" class="nav link">Pagina de noticias</a>
+        <a href="/tareanueva/admin/categoria.php" class="nav link">Categorias</a>
+        <a href="/tareanueva/panel/views/usuarios/listado.php" class="nav link">Autores</a>
+        <a href="/programacion2" class="nav link">Cerrar sesion</a>
+
+    </nav>
+</header>
+
+
+<div class="menu_container" id="categories">
+        <ul class="nav-links">
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">Accidentes</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">Deportes</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">Entretenimientos</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">Música</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">Politica</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">Otros</a></li>
+        </ul>
     </div>
-    <ul class="nav-links">
-        <li><a href="http://localhost/tareanueva/viewsnoticias/index2.php">Pagina de noticias</a></li>
-        <li><a href="/tareanueva/panel/views/usuarios/listado.php">Autores</a></li>
 
-        <li><a href="/tareanueva/admin/categoria.php">Categorias</a></li>
-        <li><a href="/Programacion2/login.php">Cerrar sesión</a></li>
-    </ul>
-</nav>
 
+<style>
+    header{
+        display: flex;
+        justify-content: space-between;
+        min-height: 70px;
+        background-color: blue;
+        align-items: center;
+        padding: 10px;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+        padding-right: 20px;
+    }
+
+    nav a{
+        color: white;
+        padding-right: 10px;
+    }
+
+    nav a:hover{
+        color: black;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    .logo img{
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    @media (max-width: 700px){
+        header{
+            flex-direction: column; 
+        }
+    }
+</style>
 
 <div>
 <a class="agregarnoticia" href="/tareanueva/controlesnoti/subirnoti.php">Agregar</a>
@@ -78,12 +134,16 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
                       <th>TEXTO</th>
                       <th>IMAGEN</th>
                       <th>FECHA</th>
+                      <th>NUMERO DE CATEGORIA</th>
+                      <th>NUMERO DE AUTOR</th>
+                      <th>ACCIONES</th>
+                      <th>ACCIONES</th>
 
             
                 </tr>
                 
             </thead>
-     </tr>
+</tr>
                 
             </thead>
             <tbody><!-- Aca repetis la tabla pero utilizando el bucle while para ir actualizando con php-->
@@ -96,6 +156,8 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
                     <td> <?php echo $fila->texto ?></td>
                     <td><img width="100" src="<?php echo $fila->imagen; ?> " /></td>
                     <td> <?php echo $fila->fecha ?></td>
+                    <td> <?php echo $fila->id_categoria ?></td>
+                    <td><?php echo $fila->id_usuario ?></td>
                     <td><a class="editarnoti" href="/tareanueva/controlesnoti/subirnoti.php?operacion=edit&id=<?php echo $fila->id ?>">Editar</a></td>
                     <td><a class="eliminarnoti" href="/tareanueva/controlesnoti/logicanoti.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar esta noticia?');">Eliminar</a></td>
                 </tr>

@@ -32,13 +32,13 @@ if ($operacion === "new") {
 
         // Inserta en la base de datos
         if (!empty($imagen) && $id_categoria != 0) { // Verifica que la imagen no esté vacía y que la categoría sea válida
-            $stmt = $conexion->prepare('INSERT INTO noticias (titulo, texto, id_categoria, imagen, descripcion, fecha) VALUES (?, ?, ?, ?, ?, ?)');
+            $stmt = $conexion->prepare('INSERT INTO noticias (titulo, texto, id_categoria, imagen, descripcion, fecha, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)');
             if (!$stmt) {
                 echo 'Error al preparar la consulta: ' . $conexion->error;
                 exit();
             }
 
-            $stmt->bind_param('ssisss', $titulo, $texto, $id_categoria, $imagen, $descripcion, $fecha);
+            $stmt->bind_param('ssisssi', $titulo, $texto, $id_categoria, $imagen, $descripcion, $fecha, $id_usuario);
             if ($stmt->execute()) {
                 // Obtener el ID de la noticia recién insertada
                 $id_noticia = $stmt->insert_id; 
@@ -71,7 +71,7 @@ if ($operacion === "new") {
                 echo 'Error al ejecutar la consulta: ' . $stmt->error;
             }
 
-            
+
         if ($exito) { // Suponiendo que $exito indica si se guardó con éxito
         header("Location: formulario.php?mensaje=exito");
         exit();
@@ -117,8 +117,8 @@ if ($operacion === "new") {
         $imagen = $noticia->imagen; // Mantén la imagen existente
     }
     // Ahora actualiza la base de datos
-    $sentencia = $conexion->prepare("UPDATE noticias SET titulo = ?, descripcion = ?, texto = ?, imagen = ?, fecha = ? WHERE id = ?");
-    $sentencia->bind_param("sssssi", $titulo, $descripcion, $texto, $imagen, $fecha, $id);
+    $sentencia = $conexion->prepare("UPDATE noticias SET titulo = ?, descripcion = ?, texto = ?, id_categoria = ?, imagen = ?, fecha = ?, id_usuario = ? WHERE id = ?");
+    $sentencia->bind_param("sssissii", $titulo, $descripcion, $texto, $id_categoria, $imagen, $fecha, $id_usuario, $id);
     
     if ($sentencia->execute()) {
         // Ahora manejar la galería de imágenes
@@ -151,14 +151,12 @@ if ($operacion === "new") {
         echo $_POST['texto'];
     }
 
-    
+
 } else if ($operacion === "delete") {
     $id = intval($_GET["id"]);
     $sentencia = $conexion->prepare("DELETE FROM noticias WHERE id = ?");
     $sentencia->bind_param("i", $id);
     $sentencia->execute();
-
-
 
     header("Location: /tareanueva/admin/noticias.php");
     exit();

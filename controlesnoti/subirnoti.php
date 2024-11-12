@@ -24,11 +24,19 @@ if (isset($_GET["id"])) {
 <body>
 
 <style>
-    .body{
-        color: red;
-    }
+    
+.titulocero{
+color: white;
+background-color: blue;
+padding: 10px;
+}
+
+body{
+    background-color: black;
+    margin: 0px;
+}
 </style>
-<h1><?php echo isset($noticia) ? "EDITAR NOTICIA" : "CREAR NUEVA NOTICIA"; ?></h1>
+<h1 class="titulocero"><?php echo isset($noticia) ? "EDITAR NOTICIA" : "CREAR NUEVA NOTICIA"; ?></h1>
 
 <div class="subirnoticia">
 
@@ -78,6 +86,8 @@ if (isset($_GET["id"])) {
             <option value="5">Martin</option>
             <option value="6">Valeria</option>
             <option value="7">Valentina</option>
+            <option value="29">Tevez</option>
+
 
         </select>
 
@@ -88,15 +98,8 @@ if (isset($_GET["id"])) {
 
     <script>
     document.getElementById('miFormulario').onsubmit = function(event) {
-        // Evita que el formulario se envíe directamente, si deseas ver la alerta antes de enviarlo al servidor
         event.preventDefault();
-
-        // Lógica para enviar el formulario al servidor (si quieres enviar manualmente el formulario con JS, usa fetch o AJAX)
-
-        // Mostrar el mensaje de confirmación
         alert("¡Se ha subido correctamente!");
-
-        // Si deseas que el formulario se envíe después de mostrar la alerta, quita el event.preventDefault() y deja solo el alert()
         this.submit();
     }
 </script>

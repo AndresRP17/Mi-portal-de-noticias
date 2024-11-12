@@ -6,11 +6,45 @@
     <title>Categorias</title>
     <link rel="stylesheet" href="../estilos/estilo1.css">
     <link rel="stylesheet" href="../estilos/estilo2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
         
 <nav class="navbar">
         <div class="logo">
+        <img src="luffy.jpg"  class="luffy" alt="Logo de la empresa">
     <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">Mi portal de noticias</a></h1>
         </div>
+
+
+        <div class="redes-sociales">
+
+<a href="https://www.facebook.com/tuperfil" target="_blank">
+    <i class="fab fa-facebook fa-2x" style="color: white;"></i></a>
+
+    <a href="#" target="_blank">
+    <i class="fa-brands fa-twitter fa-2x" style="color: white; vertical-align:inherit"></i></a>
+
+
+<a href="https://www.instagram.com/tuperfil" target="_blank" aria-label="Ver mi perfil de Instagram">
+<i class="fab fa-instagram fa-2x" style="color: white;"></i>
+</a>
+
+
+<a href="https://wa.me/numero" target="_blank">
+    <i class="fab fa-youtube fa-2x" style="color: white;"></i></a>
+    
+
+<a href="#" target="_blank">
+    <i class="fab fa-whatsapp fa-2x" style="color: white;"></i></a>
+
+<a href="#" target="_blank">
+    <i class="fab fa-telegram fa-2x" style="color: white;"></i></a>
+
+<a href="#" target="_blank">
+<i class="fa-brands fa-tiktok fa-2x" style="color:white;"></i></a>
+</div>
+
+
 
         <ul class="nav-links2">
     <li><a href="/tareanueva/viewsnoticias/index2.php">Volver</a></li>

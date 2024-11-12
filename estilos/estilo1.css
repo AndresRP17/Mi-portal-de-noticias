@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0056b3;
+    background-color:  #074485;
     padding: 15px 20px;
     position: relative; /* Mantener la posición relativa para el menú desplegable */
 }
@@ -18,9 +18,22 @@ body {
 .logo a {
     color: white;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
+    font-family:'Times New Roman', Times, serif
 }
+
+.luffy {
+    height: 80px;
+    margin-right: 30px;
+}
+
+.luffy-hover {
+    width: 300px; /* Ajusta el tamaño según necesites */
+    transition: opacity 0.3s ease;
+}
+
+
 
 /* Estilo inicial para el buscador */
 
@@ -85,6 +98,7 @@ body {
 
 /* Contenedor del menú desplegable */
 .menu_container {
+    min-width: 700;
     display: none; /* Oculto por defecto */
     position: absolute; /* Para evitar que mueva otros elementos */
     top: 70px; /* Ajusta esta posición según la altura de tu navbar */

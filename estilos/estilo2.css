@@ -2,10 +2,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el tamaño de las columnas */
     gap: 25px; /* Espacio entre las noticias */
+    min-width: 700px;
     max-width: 1200px; 
     margin: 20px auto;
-    padding: 10px;
-    min-height: 400px;
+    padding: 0px;
     border: #0063d4;
 }
 
@@ -47,8 +47,7 @@
 
 .imagen-noticia {
     width: 100%; /* Imagen ocupa el ancho completo */
-    height: 200%;
-    
+    height: 200%;  
     min-height: 200px; /* Establece una altura mínima para las imágenes */
     max-height: 200px; /* Establece una altura máxima para las imágenes */
     object-fit: fill;

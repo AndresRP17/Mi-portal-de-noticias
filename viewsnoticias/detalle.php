@@ -5,8 +5,7 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"]; // Obtener el id de la noticia
 
     // Preparar y ejecutar la consulta para obtener la noticia
-$sentencia = $conexion->prepare("
-SELECT * FROM noticias WHERE id= ?");
+$sentencia = $conexion->prepare("SELECT * FROM noticias WHERE id= ?");
 
 // Enlazar el parámetro utilizando `bind_param` de MySQLi
 $sentencia->bind_param("i", $id);
@@ -19,14 +18,11 @@ $resultado = $sentencia->get_result();
 $noticia = $resultado->fetch_assoc();
 
 
-    if ($noticia) {
-        // Continúa con el resto del código
-    } else {
-        die("Noticia no encontrada.");
-    }
-} else {
-    die("ID de noticia no proporcionado.");
+if (!$noticia) {
+    echo "Noticia de mierda.";
+    die(); // Detiene la ejecución aquí
 }
+
 
     // Obtener la categoría de la noticia
     if ($noticia){
@@ -56,18 +52,23 @@ $sqlUsuarios = "SELECT noticias.*, usuarios.nombre AS autor_nombre
                 INNER JOIN usuarios ON usuarios.id = noticias.id_usuario
                 WHERE noticias.id = ?";
 $stmt = $conexion->prepare($sqlUsuarios);
+
+if ($stmt === false) {
+    die("Error en la preparación de la consulta: " . $conexion->error);
+}
+
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $resultado3 = $stmt->get_result();
-$stmt->close();
 
-// Si la noticia fue encontrada, accedes a los datos:
 if ($resultado3->num_rows > 0) {
     $noticia = $resultado3->fetch_assoc();
     $autor = $noticia['autor_nombre']; // Accede al nombre del autor
 } else {
-    die("Noticia no encontrada.");
+    die("Noticia no puta.");
 }
+
+$stmt->close();
 
 
 
@@ -82,7 +83,7 @@ $imagenes = [];
 while ($imagen = $resultado3->fetch_object()) {
 	$imagenes[] = $imagen;
 }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +94,8 @@ while ($imagen = $resultado3->fetch_object()) {
     <title>Detalle de Noticia</title>
     <link rel="stylesheet" href="../estilos/estilo1.css">
     <link rel="stylesheet" href="../estilos/estilo2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 </head>
 
@@ -102,8 +105,39 @@ while ($imagen = $resultado3->fetch_object()) {
 <header>
 <nav class="navbar">
         <div class="logo">
+        <img src="luffy.jpg"  class="luffy" alt="Logo de la empresa">
     <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">Mi portal de noticias</a></h1>
         </div>
+
+        <div class="redes-sociales">
+
+<a href="https://www.facebook.com/tuperfil" target="_blank">
+    <i class="fab fa-facebook fa-2x" style="color: white;"></i></a>
+
+    <a href="#" target="_blank">
+    <i class="fa-brands fa-twitter fa-2x" style="color: white; vertical-align:inherit"></i></a>
+
+
+<a href="https://www.instagram.com/tuperfil" target="_blank" aria-label="Ver mi perfil de Instagram">
+<i class="fab fa-instagram fa-2x" style="color: white;"></i>
+</a>
+
+
+<a href="https://wa.me/numero" target="_blank">
+    <i class="fab fa-youtube fa-2x" style="color: white;"></i></a>
+    
+
+<a href="#" target="_blank">
+    <i class="fab fa-whatsapp fa-2x" style="color: white;"></i></a>
+
+<a href="#" target="_blank">
+    <i class="fab fa-telegram fa-2x" style="color: white;"></i></a>
+
+<a href="#" target="_blank">
+<i class="fa-brands fa-tiktok fa-2x" style="color:white;"></i></a>
+</div>
+
+
 
 <ul class="nav-links2">
     <li><a href="/tareanueva/viewsnoticias/index2.php">Volver</a></li>
