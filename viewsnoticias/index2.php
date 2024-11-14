@@ -87,7 +87,7 @@ $stmt2->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi portal de noticias</title>
     <link rel="stylesheet" href="../estilos/estilo1.css">
-    <link rel="stylesheet" href="../estilos/estilo2.css">  
+    <link rel="stylesheet" href="../estilos/estilo2.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
@@ -101,7 +101,11 @@ $stmt2->close();
     <div class="logo">
     <img src="luffy.jpg"  class="luffy" alt="Logo de la empresa">
 
-        <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">Mi portal de noticias</a></h1><br>
+    <div>
+        <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">MI PORTAL DE NOTICIAS</a></h1>
+        <h5 class="fechaa" id="fecha">Fecha y hora: </h5>
+
+    </div>
     </div>
     <div class="redes-sociales">
 
@@ -136,14 +140,16 @@ $stmt2->close();
 
     <div class="menu_container" id="categories">
         <ul class="nav-links">
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">Accidentes</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">Deportes</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">Entretenimientos</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">Música</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">Politica</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">Otros</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">ACCIDENTES</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">DEPORTES</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">ENTRETENIMIENTOS</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">MUSICA</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">POLITICA</a></li>
+            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">OTROS</a></li>
         </ul>
     </div>
+
+
 </nav>
 
 <script>
@@ -167,11 +173,31 @@ menuButton.addEventListener('click', () => {
     }
 })
 
+// Mostrar la fecha y hora actual
+function mostrarFecha() {
+    const fechaElemento = document.getElementById("fecha");
+    const fechaActual = new Date();
+    fechaElemento.textContent = "Fecha y hora: " + fechaActual.toLocaleString();
+}
+
+// Llamar a las funciones al cargar la página
+mostrarFecha();
 </script>
 
-        <form action="index2.php" method="get">
+    <nav class="barra">
+    <ul>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">ACCIDENTES</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">DEPORTES</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">ENTRETENIMIENTOS</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">MUSICA</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">POLITICA</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">OTROS</li></a>
+</ul>
+</nav>
+
+            <form action="index2.php" method="get">
             <input type="text" id="buscador"  class="input" name="buscador" placeholder="Inserte una búsqueda">
-        </form>
+            </form>
 
 
         <div class="contenedor-noticias">
@@ -204,6 +230,40 @@ menuButton.addEventListener('click', () => {
         <a href="index2.php?page=<?php echo $pagina + 1 ?>&buscador=<?php echo htmlspecialchars($buscador); ?>">Siguiente</a>
     <?php } ?>
 </div>
+
+<script>
+function mostrarFecha() {
+    const fechaElemento = document.getElementById("fecha");
+    const fechaActual = new Date();
+    fechaElemento.textContent = "Fecha y hora: " + fechaActual.toLocaleString();
+}
+
+// Obtener y mostrar la ubicación
+function mostrarUbicacion() {
+    const ubicacionElemento = document.getElementById("ubicacion");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(posicion) {
+                const latitud = posicion.coords.latitude.toFixed(2);
+                const longitud = posicion.coords.longitude.toFixed(2);
+                ubicacionElemento.textContent = "Ubicación: Latitud " + latitud + ", Longitud " + longitud;
+            },
+            function(error) {
+                ubicacionElemento.textContent = "No se pudo obtener la ubicación.";
+            }
+        );
+    } else {
+        ubicacionElemento.textContent = "Geolocalización no es compatible con este navegador.";
+    }
+}
+
+// Llamar a las funciones al cargar la página
+mostrarFecha();
+mostrarUbicacion();
+
+</script>
+
 </body>
 
 <footer class="footer"> 

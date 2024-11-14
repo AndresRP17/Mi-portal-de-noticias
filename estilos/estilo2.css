@@ -263,3 +263,42 @@ h2{
 	height: 100%;
 	object-fit: cover;
 }
+
+.barra {
+    width: 95%;
+    margin: 30px;
+}
+
+.barra ul {
+    display: flex;
+    list-style: none;
+    padding: 10px;
+    border: 2px solid #020202;
+    border-radius: 0px;
+    border-right: none;
+    border-left: none;
+    
+}
+
+.barra ul li {
+    flex: auto;
+    justify-content: center;
+}
+
+.barra ul li a {
+    padding: 10px;
+    color: rgb(5, 5, 5);
+    font-size: small;
+    text-decoration: none;
+}
+
+.barra ul li a:hover {
+    background-color: #1d0dac;
+    color: white;
+}
+
+.barra ul li a.activo {
+    background-color: #1d0dac;  /* Resalta el fondo */
+    color: white;  /* Cambia el color del texto */
+    font-weight: bold;  /* Hace que el texto sea más pesado */
+}

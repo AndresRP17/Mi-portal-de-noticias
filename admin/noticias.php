@@ -58,6 +58,8 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
         <h2>Mi portal de noticias</h2>
     </a>
 
+   
+
     <nav>
         <a href="/tareanueva/viewsnoticias/index2.php" class="nav link">Pagina de noticias</a>
         <a href="/tareanueva/admin/categoria.php" class="nav link">Categorias</a>
@@ -67,19 +69,8 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
     </nav>
 </header>
 
-
-<div class="menu_container" id="categories">
-        <ul class="nav-links">
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">Accidentes</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">Deportes</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">Entretenimientos</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">Música</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">Politica</a></li>
-            <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">Otros</a></li>
-        </ul>
-    </div>
-
-
+  <a href="https://github.com/AndresRP17/Mi-portal-de-noticias" target="_blank">
+     <i class="fa-solid fa-code fa-2xl" style="color:blue"></i></a>
 <style>
     header{
         display: flex;

@@ -12,8 +12,13 @@
 <nav class="navbar">
         <div class="logo">
         <img src="luffy.jpg"  class="luffy" alt="Logo de la empresa">
-    <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">Mi portal de noticias</a></h1>
-        </div>
+        <div>
+        <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">MI PORTAL DE NOTICIAS</a></h1>
+        <h5 class="fechaa" id="fecha">Fecha y hora: </h5>
+    </div>
+    </div>
+      
+</div>
 
 
         <div class="redes-sociales">
@@ -50,7 +55,20 @@
     <li><a href="/tareanueva/viewsnoticias/index2.php">Volver</a></li>
 </nav>
 </head>
+
+<nav class="barra">
+    <ul>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">ACCIDENTES</a></li>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">DEPORTES</a></li>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6" class="activo">ENTRETENIMIENTOS</a></li>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">MUSICA</a></li>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">POLITICA</a></li>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">OTROS</a></li>
+</ul>
+</nav>
+
 <body>
+
     <?php
 // Conexión a la base de datos
 include("../panel/includes/db.php");
@@ -137,6 +155,62 @@ if ($id_categoria > 0) {
     echo '</div>'; // Fin de paginacion
 }
 ?>
+
+
+<script>
+
+    // Mostrar la fecha y hora actual
+function mostrarFecha() {
+    const fechaElemento = document.getElementById("fecha");
+    const fechaActual = new Date();
+    fechaElemento.textContent = "Fecha y hora: " + fechaActual.toLocaleString();
+}
+
+// Obtener y mostrar la ubicación
+function mostrarUbicacion() {
+    const ubicacionElemento = document.getElementById("ubicacion");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(posicion) {
+                const latitud = posicion.coords.latitude.toFixed(2);
+                const longitud = posicion.coords.longitude.toFixed(2);
+                ubicacionElemento.textContent = "Ubicación: Latitud " + latitud + ", Longitud " + longitud;
+            },
+            function(error) {
+                ubicacionElemento.textContent = "No se pudo obtener la ubicación.";
+            }
+        );
+    } else {
+        ubicacionElemento.textContent = "Geolocalización no es compatible con este navegador.";
+    }
+}
+
+ document.addEventListener("DOMContentLoaded", function() {
+  const links = document.querySelectorAll(".barra ul li a"); // Selecciona todos los enlaces
+  
+  // Elimina la clase 'activo' de todos los enlaces
+  links.forEach(link => {
+    link.classList.remove("activo");
+  });
+  
+  // Extrae el id_categoria de la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentCategoryId = urlParams.get('id_categoria'); // Obtiene el id_categoria de la URL
+  
+  // Verifica si el id_categoria del enlace coincide con el de la URL
+  links.forEach(link => {
+    const linkCategoryId = new URLSearchParams(link.search).get('id_categoria');
+    
+    if (linkCategoryId === currentCategoryId) { // Si coinciden, agrega la clase 'activo'
+      link.classList.add("activo");
+    }
+  });
+});
+
+
+
+</script>
 
 </body>
 </html> 

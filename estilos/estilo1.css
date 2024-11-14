@@ -14,13 +14,20 @@ body {
     position: relative; /* Mantener la posición relativa para el menú desplegable */
 }
 
+.logo {
+    display: flex;
+    flex-direction: row; /* Apila horizontalmente la imagen y el título */
+    align-items: center; /* Asegura que la imagen y el título estén alineados verticalmente */
+}
+
 /* Estilo del logo */
 .logo a {
     color: white;
     text-decoration: none;
     font-size: 30px;
     font-weight: bold;
-    font-family:'Times New Roman', Times, serif
+    font-family:'Times New Roman', Times, serif;
+    align-items: center;
 }
 
 .luffy {
@@ -28,12 +35,13 @@ body {
     margin-right: 30px;
 }
 
-.luffy-hover {
-    width: 300px; /* Ajusta el tamaño según necesites */
-    transition: opacity 0.3s ease;
+.fechaa {
+    margin-top: 19px;
+    text-align: left;
+    color: white; 
+    justify-content: end;
+    font-size: small;
 }
-
-
 
 /* Estilo inicial para el buscador */
 
@@ -101,7 +109,7 @@ body {
     min-width: 700;
     display: none; /* Oculto por defecto */
     position: absolute; /* Para evitar que mueva otros elementos */
-    top: 70px; /* Ajusta esta posición según la altura de tu navbar */
+    top: 90px; /* Ajusta esta posición según la altura de tu navbar */
     right: 20px; /* Alineado a la derecha */
     background-color: #0056b3; /* Color de fondo del menú */
     border-radius: 5px; /* Bordes redondeados */

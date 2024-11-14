@@ -101,14 +101,16 @@ while ($imagen = $resultado3->fetch_object()) {
 
 <body>
 
-
 <header>
 <nav class="navbar">
         <div class="logo">
         <img src="luffy.jpg"  class="luffy" alt="Logo de la empresa">
-    <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">Mi portal de noticias</a></h1>
-        </div>
-
+  
+        <div>
+        <h1 class="titulo"><a href="/tareanueva/viewsnoticias/index2.php">MI PORTAL DE NOTICIAS</a></h1>
+        <h5 class="fechaa" id="fecha">Fecha y hora: </h5>
+    </div>
+    </div>
         <div class="redes-sociales">
 
 <a href="https://www.facebook.com/tuperfil" target="_blank">
@@ -145,6 +147,16 @@ while ($imagen = $resultado3->fetch_object()) {
 </nav>
 </header>
 
+<nav class="barra">
+    <ul>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=3">ACCIDENTES</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=1">DEPORTES</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=6">ENTRETENIMIENTOS</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=4">MUSICA</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=5">POLITICA</li></a>
+    <li><a href="/tareanueva/viewsnoticias/categorias.php?id_categoria=12">OTROS</li></a>
+</ul>
+</nav>
 
 <div class="item">
     <div>
@@ -192,6 +204,16 @@ while ($imagen = $resultado3->fetch_object()) {
         </div>
     <?php } ?>
 </div>
+
+
+<script>
+    // Mostrar la fecha y hora actual
+function mostrarFecha() {
+    const fechaElemento = document.getElementById("fecha");
+    const fechaActual = new Date();
+    fechaElemento.textContent = "Fecha y hora: " + fechaActual.toLocaleString();
+}
+</script>
 
 </body>
 
