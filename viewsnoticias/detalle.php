@@ -213,6 +213,9 @@ function mostrarFecha() {
     const fechaActual = new Date();
     fechaElemento.textContent = "Fecha y hora: " + fechaActual.toLocaleString();
 }
+
+mostrarFecha();
+
 </script>
 
 </body>

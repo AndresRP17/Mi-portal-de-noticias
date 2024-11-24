@@ -2,7 +2,52 @@
 //aca enlazas el archivo que creaste anteriormente y metes la variable//
 include("../../includes/db.php");//Es por la ubicacion del archivo en PHP!!!
 $resultado = $conexion->query("SELECT * FROM usuarios");
+
+include("../../includes/db.php");
+
+if (isset($_GET["id"])){
+
+    $id = $_GET["id"];//por get obtenes el id que vas a trabajar//
+    $sentencia = $conexion->prepare("SELECT * FROM usuarios WHERE id = ? ");//preparas sentencia
+    $sentencia->bind_param("i", $id);//parametros con el que trabajas aca es un numeror por eso int
+    $sentencia->execute();
+    $resultado = $sentencia->get_result();
+    $usuario = $resultado->fetch_object();
+
+} else {
+
+}
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/tareanueva/admin/noticias.php">Volver</a>
+    <?php if (isset($_GET["id"])) { ?>
+        <h1>Editar autor</h1>
+    <?php } else { ?>
+        <h1>Nuevo autor</h1>
+    <?php }?>
+
+    <form action="/tareanueva/panel/controlador/usuarios.php?operacion=<?php echo (isset($_GET['id'])) ? 'edit' : 'new'; ?>" method="post">
+    <input type="hidden" name="id" value="<?php echo (isset($_GET["id"])) ? $usuario->id : "" ?>"> <!-- aca se hace que si tiene ID es edit o new-->
+    
+        <div>
+                <label>NOMBRE</label>
+                <input type="text" aria-placeholder="Mete un autor facha" class="input" name="nombre" value="<?php echo (isset($_GET["id"])) ? $usuario->nombre : "" ?> " placeholder="Por favor inserta un nombre">
+                
+        </div>
+       
+        <button class="guardado">Guardar</button>
+
+    </form>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -119,9 +164,40 @@ td a:active {
     transform: scale(0.98);
 }
 
+.input{
+width: 10%;
+    padding: 10px;
+    font-size: 15px;
+    border: 3px solid black;
+    border-radius: 5px black;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+        .guardado {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+
+
     </style>
 
-<a href="/tareanueva/panel/views/usuarios/formulario.php">Agregar</a>
     <table><!-- Aca haces la tabla normal-->
             <thead>
                 <tr>
@@ -129,7 +205,6 @@ td a:active {
                     <th>NOMBRE</th>
                     <th>ACCIONES</th>
                 </tr>
-                <a href="/tareanueva/admin/noticias.php">Volver</a>
             </thead>
             <tbody><!-- Aca repetis la tabla pero utilizando el bucle while para ir actualizando con php-->
             <?php while ($fila = $resultado->fetch_object()) { ?> 
@@ -137,7 +212,7 @@ td a:active {
                 <tr>
                     <td> <?php echo $fila->id ?></td>
                     <td> <?php echo $fila->nombre ?></td>
-                    <td><a href="/tareanueva/panel/views/usuarios/formulario.php?id=<?php echo $fila->id ?>">Editar</a></td>
+                    <td><a href="/tareanueva/panel/views/usuarios/listado.php?id=<?php echo $fila->id ?>">Editar</a></td>
                     <td><a href="/tareanueva/panel/controlador/usuarios.php?operacion=delete&id=<?php echo $fila->id ?>" onclick="return confirm('¿Estas seguro de querer eliminar este usuario?');">Eliminar</a></td>
                 </tr>
                 

@@ -238,29 +238,8 @@ function mostrarFecha() {
     fechaElemento.textContent = "Fecha y hora: " + fechaActual.toLocaleString();
 }
 
-// Obtener y mostrar la ubicación
-function mostrarUbicacion() {
-    const ubicacionElemento = document.getElementById("ubicacion");
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(posicion) {
-                const latitud = posicion.coords.latitude.toFixed(2);
-                const longitud = posicion.coords.longitude.toFixed(2);
-                ubicacionElemento.textContent = "Ubicación: Latitud " + latitud + ", Longitud " + longitud;
-            },
-            function(error) {
-                ubicacionElemento.textContent = "No se pudo obtener la ubicación.";
-            }
-        );
-    } else {
-        ubicacionElemento.textContent = "Geolocalización no es compatible con este navegador.";
-    }
-}
-
 // Llamar a las funciones al cargar la página
 mostrarFecha();
-mostrarUbicacion();
 
 </script>
 

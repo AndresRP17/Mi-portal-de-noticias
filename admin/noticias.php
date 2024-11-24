@@ -14,6 +14,10 @@ if (!isset($_SESSION['logueado']) || $_SESSION['logueado'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../estilos/estilo3.css">
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
 </head>
 <style>
         body {
@@ -57,10 +61,10 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
         <img src="luffy.jpg" alt="Logo de la empresa">
         <h2>Mi portal de noticias</h2>
     </a>
-
-   
-
+    
+    
     <nav>
+        <a href="https://github.com/AndresRP17/Mi-portal-de-noticias"> <i class="fa-solid fa-code fa-2xl" style="color: white;"></i></a>
         <a href="/tareanueva/viewsnoticias/index2.php" class="nav link">Pagina de noticias</a>
         <a href="/tareanueva/admin/categoria.php" class="nav link">Categorias</a>
         <a href="/tareanueva/panel/views/usuarios/listado.php" class="nav link">Autores</a>
@@ -69,9 +73,8 @@ $resultado = $conexion->query("SELECT * FROM noticias order by id DESC");
     </nav>
 </header>
 
-  <a href="https://github.com/AndresRP17/Mi-portal-de-noticias" target="_blank">
-     <i class="fa-solid fa-code fa-2xl" style="color:blue"></i></a>
 <style>
+
     header{
         display: flex;
         justify-content: space-between;

@@ -37,13 +37,47 @@ if (isset($_GET["id"])){
     
         <div>
                 <label>NOMBRE</label>
-                <input type="text" name="nombre" value="<?php echo (isset($_GET["id"])) ? $usuario->nombre : "" ?>">
+                <input type="text" class="input" name="nombre" value="<?php echo (isset($_GET["id"])) ? $usuario->nombre : "" ?>">
                 
         </div>
        
-        <button>Guardar</button>
+        <button class="guardado">Guardar</button>
 
     </form>
+
+    <style>
+        body{
+            background-color: blue;
+        }
+        .input{
+            border-radius: 5px solid black ;
+            color: red;
+            padding: 10px 20px;
+        }
+
+        .guardado {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+
+        
+    </style>
 
 </body>
 </html>
